@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taskDefinition id="aws_ec2_associate_route_table" name="AWS EC2 Associate Route Table" schema_version="1.0" version="1">
+    <author>support@kineticdata.com</author>
+    <description>Associates a subnet with a route table.</description>
+    <helpurl></helpurl>
+    <visible>true</visible>
+    <deferrable>false</deferrable>
+    <parameters>
+      <parameter id="dry_run" label="Dry Run" required="true"
+          tooltip="Dry run validates user permissions and inputs without completing the EC2 action (true or false).">false</parameter>
+      <parameter id="subnet_id" label="Subnet ID" required="true"
+          tooltip="The ID of the subnet to which the route table will connect. Must match an existing value in AWS." />
+      <parameter id="route_table_id" label="Route Table ID" required="true"
+          tooltip="The ID of the route table to connect to the subnet. Must match an existing value in AWS." />
+    </parameters>
+    <handler name="aws_ec2_associate_route_table" version="1">
+        <infos>
+          <info name="access_key">&lt;%= @info['access_key'] %&gt;</info>
+          <info name="secret_key">&lt;%= @info['secret_key'] %&gt;</info>
+          <info name="region">&lt;%= @info['region'] %&gt;</info>
+          <info name="enable_debug_logging">&lt;%= @info['enable_debug_logging'] %&gt;</info>
+        </infos>
+        <parameters>
+          <parameter name='dry_run'>&lt;%= @parameters['dry_run'] %&gt;</parameter>
+          <parameter name='subnet_id'>&lt;%= @parameters['subnet_id'] %&gt;</parameter>
+          <parameter name='route_table_id'>&lt;%= @parameters['route_table_id'] %&gt;</parameter>
+        </parameters>
+    </handler>
+    <results format="xml">
+      <result name="Association Id"/>
+    </results>
+</taskDefinition>

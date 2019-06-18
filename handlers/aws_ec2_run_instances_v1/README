@@ -1,0 +1,111 @@
+== AWS EC2 Run Instances
+    This handler is used to Launch the specified number of instances using
+    an AMI for which you have permissions.
+
+=== Parameters
+    [Dry Run]
+      Dry run validates user permissions and inputs without completing the EC2
+      action (true or false).
+    [Image ID]
+      The ID of the AMI.
+    [Minimum Instance Count]
+      The minimum number of instances to launch. If you specify a minimum that
+      is more instances than Amazon EC2 can launch in the target Availability
+      Zone, Amazon EC2 launches no instances.
+    [Maximum Instance Count]
+      The maximum number of instances to launch. If you specify more instances
+      than Amazon EC2 can launch in the target Availability Zone, Amazon EC2
+      launches the largest possible number of instances above MinCount.
+    [Key Name]
+      The name of the key pair. Linux instances have access to the public key
+      of the key pair at boot. You can use this key to provide secure access to
+      the instance. Amazon EC2 public images use this feature to provide secure
+      access without passwords. For more information, see Key Pairs in the Amazon
+      Elastic Compute Cloud User Guide.
+    [Security Groups]
+      One or more security group names, separated by commas. For a nondefault
+      VPC, you must use Security Group IDs instead.
+    [Security Group IDs]
+      One or more security group IDs, separated by commas.
+    [User Data]
+      The Base64-encoded MIME user data for the instances.
+    [Instance Type]
+      The instance type. For more information, see Instance Types in the Amazon
+      Elastic Compute Cloud User Guide. If not provided the AWS default is
+      m1.small.
+    [Placement]
+      The placement for the instance. Format: {&quot;availability_zone&quot;:&quot;some value&quot;,&quot;group_name&quot;:&quot;some value&quot;,&quot;tenancy&quot;:&quot;default|dedicated&quot;}
+    [Kernel ID]
+      The ID of the kernel. AWS recommends that you use PV-GRUB instead of
+      kernels and RAM disks. For more information, see PV-GRUB in the Amazon
+      Elastic Compute Cloud User Guide.
+    [Ramdisk ID]
+      The ID of the RAM disk. AWS recommends that you use PV-GRUB instead of
+      kernels and RAM disks. For more information, see PV-GRUB in the Amazon
+      Elastic Compute Cloud User Guide.
+    [Block Device Mapping]
+      The block device mapping. Format: [{&quot;virtual_name&quot;:&quot;some value&quot;,&quot;device_name&quot;:&quot;some value&quot;,&quot;ebs&quot;:{&quot;snapshot_id&quot;:&quot;some value&quot;,&quot;volume_size&quot;:some integer,&quot;delete_on_termination&quot;:true|false,&quot;volume_type&quot;:&quot;standard|iol|gp2&quot;,&quot;iops&quot;:&quot;some integer&quot;,&quot;encrypted&quot;:true|false},&quot;no_device&quot;:&quot;some value&quot;},...]
+    [Monitoring]
+      true or false. The monitoring for the instance.
+    [Subnet ID]
+      The ID of the subnet to launch the instance into.
+    [Disable API Termination]
+      true or false. If you set this parameter to true, you can't terminate the
+      instance using the Amazon EC2 console, CLI, or API; otherwise, you can.
+      If you set this parameter to true and then later want to be able to
+      terminate the instance, you must first change the value of the
+      disableApiTermination attribute to false using ModifyInstanceAttribute.
+      Alternatively, if you set InstanceInitiatedShutdownBehavior to terminate,
+      you can terminate the instance by running the shutdown command from the
+      instance.
+    [Instance Initiated Shutdown Behavior]
+      Accepts 'stop' or 'terminate'.  Indicates whether an instance stops or
+      terminates when you initiate shutdown from the instance (using the
+      operating system command for system shutdown). AWS default if not
+      provided: stop
+    [Private IP Address]
+      The primary IP address. If not provided, AWS selects an IP address from
+      the IP address range of the subnet. Note: This cannot be used in
+      conjunction with setting a provide ip address as primary in the network
+      interfaces input structure.
+    [Client Token]
+      Unique, case-sensitive identifier you provide to ensure the idempotency
+      of the request.
+    [Network Interfaces]
+      One or more network interfaces. Format: [{&quot;network_interface_id&quot;:&quot;some_value&quot;,&quot;device_index&quot;:some_integer,&quot;subnet_id&quot;:&quot;some_value&quot;,&quot;description&quot;:&quot;some_value&quot;,&quot;private_ip_address&quot;:&quot;some_value&quot;,&quot;groups&quot;:[&quot;some value&quot;,&quot;some_other_value&quot;,&quot;yet_some_other_value&quot;],&quot;delete_on_termination&quot;:true | false,&quot;private_ip_addresses&quot;:[{&quot;private_ip_address&quot;:&quot;some_value&quot;,&quot;primary&quot;:true|false}],&quot;secondary_private_ip_address_count&quot;:some_integer,&quot;associate_public_ip_address&quot;:true|false},{another entry}]
+    [IAM Instance Profile]
+      The IAM instance profile. Format: {&quot;arn&quot;:&quot;some value&quot;,&quot;name&quot;:&quot;some value&quot;}
+    [EBS Optimized]
+      true or false. Indicates whether the instance is optimized for EBS I/O.
+      This optimization provides dedicated throughput to Amazon EBS and an
+      optimized configuration stack to provide optimal EBS I/O performance.
+      This optimization isn't available with all instance types. Additional
+      usage charges apply when using an EBS-optimized instance. If not provided,
+      the AWS default is false.
+
+=== Results
+    [Reservation ID]
+      Reservation of ID EC2 run instances.
+    [Owner ID]
+      Owner ID of EC2 run instances.
+    [Requester ID]
+      Requester ID of EC2 run instances.
+    [Groups XLM]
+      Groups XLM of EC2 run instances.
+    [Groups String]
+      Groups String of EC2 run instances.
+    [Instances XML]
+      Instances XML of EC2 run instances.
+    [Instances String]
+      Instances String of EC2 run instances.
+
+=== Detailed Description
+    This handler uses the AWS REST API Launch the specified number of
+    instances using an AMI for which you have permissions.  For more information
+    see the AWS Amazon Virtual Private Cloud User Guide online.
+
+    The Dry Run parameter validates user permissions and inputs. If it is set to
+    true, an error will always be thrown by the handler before completing the
+    handler action. Error response will be 'DryRunOperation' if the account has
+    proper permissions and inputs; 'UnauthorizedOperation' if the account does
+    not have proper permissions.

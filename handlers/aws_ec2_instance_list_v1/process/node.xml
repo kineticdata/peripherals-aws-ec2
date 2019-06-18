@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taskDefinition id="aws_ec2_instance_list" name="AWS EC2 Instance List" schema_version="1.0" version="1">
+    <author>support@kineticdata.com</author>
+    <description>Retrieves list of machine instances attached to the AWS credentials supplied</description>
+    <helpurl>http://ktc.kineticdata.com/handler/aws_ec2_instance_list/1</helpurl>
+    <visible>false</visible>
+    <deferrable>false</deferrable>
+    <parameters>
+    </parameters>
+    <handler name="aws_ec2_instance_list" version="1">
+        <infos>
+            <info name="access_key">&lt;%= @info['access_key'] %&gt;</info>
+            <info name="secret_key">&lt;%= @info['secret_key'] %&gt;</info>
+            <info name="region">&lt;%= @info['region'] %&gt;</info>
+            <info name="enable_debug_logging">&lt;%= @info['enable_debug_logging'] %&gt;</info>
+        </infos>
+        <parameters>
+        </parameters>
+    </handler>
+    <results format="xml">
+        <result name="Instance List"/>
+    </results>
+</taskDefinition>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taskDefinition id="aws_ec2_instance_retrieve" name="AWS EC2 Instance Retrieve" schema_version="1.0" version="1">
+    <author>support@kineticdata.com</author>
+    <description>Retrieves the properties of the machine instance supplied</description>
+    <helpurl>http://ktc.kineticdata.com/handler/aws_ec2_instance_retrieve/1</helpurl>
+    <visible>true</visible>
+    <deferrable>false</deferrable>
+    <parameters>
+        <parameter id="instance_id" label="Instance ID" required="true"
+            tooltip="The instance id of the EC2 virtual machine that this handler will retrieve details about." />
+    </parameters>
+    <handler name="aws_ec2_instance_retrieve" version="1">
+        <infos>
+          <info name="access_key">&lt;%= @info['access_key'] %&gt;</info>
+          <info name="secret_key">&lt;%= @info['secret_key'] %&gt;</info>
+          <info name="region">&lt;%= @info['region'] %&gt;</info>
+          <info name="enable_debug_logging">&lt;%= @info['enable_debug_logging'] %&gt;</info>
+        </infos>
+        <parameters>
+            <parameter name="instance_id">&lt;%= @parameters['instance_id'] %&gt;</parameter>
+        </parameters>
+    </handler>
+    <results format="xml">
+        <result name="Virtualization Type"/>
+        <result name="IP Address"/>
+        <result name="Kernel ID"/>
+        <result name="AMI Launcher Index"/>
+        <result name="Private IP Address"/>
+        <result name="Key Name"/>
+        <result name="Launch Time"/>
+        <result name="Instance Type"/>
+        <result name="Image ID"/>
+        <result name="Private DNS Name"/>
+        <result name="Root Device Name"/>
+        <result name="Root Device Type"/>
+        <result name="Architecture"/>
+        <result name="Monitoring State"/>
+        <result name="Availability Zone"/>
+        <result name="DNS Name"/>
+        <result name="Instance State"/>
+    </results>
+</taskDefinition>

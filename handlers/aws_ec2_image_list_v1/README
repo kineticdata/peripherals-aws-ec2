@@ -1,0 +1,114 @@
+== AWS_EC2_Image_List
+This handler returns a list of all images available to you.  Images available to you include public images, private images that you own, and private images owned by other AWS accounts but for which you have explicit launch permissions. 
+
+For more information, see the Detailed Description section below.
+
+=== Parameters
+[Image Launch Permissions]
+Public indicates public launch permissions. Private is for an image with only implicit and explicit launch permissions.
+Valid Values: Public | Private | Both
+
+[Image Architecture]
+The architecture of the image.
+Valid Values: i386 | x86_64 | all
+
+[Image Type]
+The type of image
+Valid Values: machine | kernel | ramdisk | all
+
+[Image State]
+Current state of the AMI. If the operation returns available, the image is successfully registered and available for launching.
+Valid Values: available | pending | failed | all
+
+=== Authentication
+This handler requires two info values for AWS authentication: Access Key ID and
+the Secret Access Key. These are analogous to username and password.
+
+To find authentication values from the AWS account:
+
+  1. Navigate to the following URL: https://aws.amazon.com/account/
+  2. Click the "Security Credentials" link (if you are not logged in, you will
+     be prompted to do so).
+  3. Click the "Access Credentials" link.  Here you will find a list of your
+     Access Keys.
+  5. Use the Access Key ID to configure the access_key_id info value of this
+     handler.
+  6. To retrieve the Secret Access Key, click the "Show" link next to the Access
+     Key ID that will be used.
+  7. Use the Secret Access Key to configure the secret_access_key info value of
+     this handler.
+
+=== Results
+[Images List]
+  An XML string representing a list of images (by id)
+
+=== Detailed Description
+
+This handler will be used primarily in a loop to iterate over multiple EC2 image
+instances. In order to be used by the Loop handler, a single value is returned
+as an escaped XML string. called "Instance List".
+
+The Instance List will have the following format:
+<images>
+    <image>ari-fe916297</image>
+    <image>ari-8b779ae2</image>
+    <image>ari-926b8bfb<image>
+</instances>
+
+To setup the Loop handler, refer to the Image List from this handler for
+'Data Source' and use '/images/image'as the 'Variable Path'.
+
+The describe_images function is the base AWS::EC2 gem call we are using for
+this handler and returns a multi-level hash/array nest with a top level hash key
+of "imagesSet".
+
+The imagesSet has the following pseudo-xml form. Elements with the <item> 
+tag are array members and are referenced by numerical index.
+
+All others are hash members and are references by element/key name.
+
+  <imagesSet>
+    <item>
+      <imageId/>
+      <imageLocation/>
+      <imageState/>
+      <imageOwnerId/>
+      <isPublic/>
+      <architecture/>
+      <imageType/>
+      <kernelId/>
+      <ramdiskId/>
+      <imageOwnerAlias/>
+      <name/>
+      <description/>
+      <rootDeviceType/>
+      <rootDeviceName/>
+      <blockDeviceMapping>
+        <item>
+          <deviceName/>
+          <ebs>
+            <snapshotId/>
+            <volumeSize/>
+            <deleteOnTermination/>
+          </ebs>
+        </item>
+      </blockDeviceMapping>
+      <virtualizationType/>
+      <tagSet/>
+      <hypervisor/>
+    </item>
+  </imagesSet>
+
+To retrieve the imageId, for example, simply flatten the above structure by 
+removing inapplicable items
+
+  <imagesSet>
+    <item>
+      <imageId/>
+    </item>
+  </imagesSet>
+
+Treat items as arrays and all other members as hash keys. Doing so, we can
+reference imageId value in the following manner:
+
+@base_aws_object.imagesSet.item[index].imageId

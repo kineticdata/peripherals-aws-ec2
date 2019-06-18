@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taskDefinition id="aws_ec2_create_key_pair_as_attachment" name="AWS EC2 Create Key Pair As Attachment" schema_version="1.0" version="1">
+    <author>support@kineticdata.com</author>
+    <description>Creates a 2048-bit RSA key pair with the specified name and attaches the result to a Kinetic Request CE submission.</description>
+    <helpurl></helpurl>
+    <visible>true</visible>
+    <deferrable>false</deferrable>
+    <parameters>
+        <parameter id="dry_run" label="Dry Run" required="true"
+            tooltip="Dry run validates user permissions and inputs without completing the EC2 action (true or false).">false</parameter>
+        <parameter id="key_name" label="Key Name" required="true"
+            tooltip="A unique name for the key pair." />
+        <parameter id="space_slug" label="Space Slug" required="false"
+            tooltip="Slug of the space to create the submission in." />
+        <parameter id="kapp_slug" label="Kapp Slug" required="true"
+            tooltip="Slug of the kapp to create the submission in." />
+        <parameter id="form_slug" label="Form Slug" required="true"
+            tooltip="Slug of the form to create the submission in." />
+        <parameter id="attachment_field_name" label="Field Name" required="true"
+            tooltip="Name of the field to upload the attachment to." />
+    </parameters>
+    <handler name="aws_ec2_create_key_pair_as_attachment" version="1">
+        <infos>
+            <info name="access_key">&lt;%= @info['access_key'] %&gt;</info>
+            <info name="secret_key">&lt;%= @info['secret_key'] %&gt;</info>
+            <info name="region">&lt;%= @info['region'] %&gt;</info>
+            <info name="ce_server">&lt;%= @info['ce_server'] %&gt;</info>
+            <info name="ce_username">&lt;%= @info['ce_username'] %&gt;</info>
+            <info name="ce_password">&lt;%= @info['ce_password'] %&gt;</info>
+            <info name="space_slug">&lt;%= @info['space_slug'] %&gt;</info>
+            <info name="enable_debug_logging">&lt;%= @info['enable_debug_logging'] %&gt;</info>
+        </infos>
+        <parameters>
+            <parameter name='space_slug'>&lt;%= @parameters['space_slug'] %&gt;</parameter>
+            <parameter name='kapp_slug'>&lt;%= @parameters['kapp_slug'] %&gt;</parameter>
+            <parameter name='form_slug'>&lt;%= @parameters['form_slug'] %&gt;</parameter>
+            <parameter name='attachment_field_name'>&lt;%= @parameters['attachment_field_name'] %&gt;</parameter>
+            <parameter name='dry_run'>&lt;%= @parameters['dry_run'] %&gt;</parameter>
+            <parameter name='key_name'>&lt;%= @parameters['key_name'] %&gt;</parameter>
+        </parameters>
+    </handler>
+    <results format="xml">
+        <result name="Submission Id"/>
+    </results>
+</taskDefinition>

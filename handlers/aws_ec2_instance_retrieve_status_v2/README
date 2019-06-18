@@ -1,0 +1,30 @@
+== AWS EC2 Instance Retrieve Status
+    This handler is used to retrieve the status of a particular EC2 instance.
+
+=== Parameters
+    [Dry Run]
+      Dry run validates user permissions and inputs without completing the EC2
+      action (true or false).
+    [Instance ID]
+      The instance id of the EC2 virtual machine that this handler will
+      retrieve a status from
+
+=== Results
+    [Instance Status]
+      The status of the instance you are querying information about.
+
+==== Sample Configuration
+    Dry Run:                        true
+    Instance ID:                    i-615670a7
+
+=== Detailed Description
+    This handler uses the AWS REST API to retrieve the status of a particular
+    EC2 instance.  The instance you are inquiring about is identified by its
+    instance ID.  For more information see the AWS Amazon Virtual Private Cloud
+    User Guide online.
+
+    The Dry Run parameter validates user permissions and inputs. If it is set to
+    true, an error will always be thrown by the handler before completing the
+    handler action. Error response will be 'DryRunOperation' if the account has
+    proper permissions and inputs; 'UnauthorizedOperation' if the account does
+    not have proper permissions.

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taskDefinition id="aws_ec2_create_security_group" name="AWS EC2 Create Security Group" schema_version="1.0" version="1">
+    <author>support@kineticdata.com</author>
+    <description>This handler is used to create a security group in AWS.</description>
+    <helpurl></helpurl>
+    <visible>true</visible>
+    <deferrable>false</deferrable>
+    <parameters>
+        <parameter id="dry_run" label="Dry Run" required="true"
+            tooltip="Dry run validates user permissions and inputs without completing the EC2 action (true or false).">false</parameter>
+        <parameter id="group_name" label="Group Name" required="true"
+            tooltip="A friendly name for the security group (255 character max length)." />
+        <parameter id="description" label="Description" required="true"
+            tooltip="A description for the security group (255 character max length)." />
+        <parameter id="vpc_id" label="VPC ID" required="true"
+            tooltip="The ID of the VPC." />
+    </parameters>
+    <handler name="aws_ec2_create_security_group" version="1">
+        <infos>
+            <info name="access_key">&lt;%= @info['access_key'] %&gt;</info>
+            <info name="secret_key">&lt;%= @info['secret_key'] %&gt;</info>
+            <info name="region">&lt;%= @info['region'] %&gt;</info>
+            <info name="enable_debug_logging">&lt;%= @info['enable_debug_logging'] %&gt;</info>
+        </infos>
+        <parameters>
+            <parameter name='dry_run'>&lt;%= @parameters['dry_run'] %&gt;</parameter>
+            <parameter name='group_name'>&lt;%= @parameters['group_name'] %&gt;</parameter>
+            <parameter name='description'>&lt;%= @parameters['description'] %&gt;</parameter>
+            <parameter name='vpc_id'>&lt;%= @parameters['vpc_id'] %&gt;</parameter>
+        </parameters>
+    </handler>
+    <results format="xml">
+        <result name="Group ID"/>
+    </results>
+</taskDefinition>

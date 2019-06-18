@@ -1,0 +1,25 @@
+== AWS EC2 Delete Key Pair
+    Deletes the specified key pair, by removing the public key from Amazon EC2.
+
+=== Parameters
+  [Dry Run]
+    Dry run validates user permissions and inputs without completing the EC2
+    action (true or false).
+  [Key Name]
+    The name of the key pair to be deleted
+
+=== Results
+  This handler returns no results
+
+==== Sample Configuration
+Dry Run:                  false
+Key Name:                 sample-key
+
+=== Detailed Description
+    Deletes the specified key pair, by removing the public key from Amazon EC2.
+
+    The Dry Run parameter validates user permissions and inputs. If it is set to
+    true, an error will always be thrown by the handler before completing the
+    handler action. Error response will be 'DryRunOperation' if the account has
+    proper permissions and inputs; 'UnauthorizedOperation' if the account does
+    not have proper permissions.

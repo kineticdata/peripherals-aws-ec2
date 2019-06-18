@@ -1,0 +1,108 @@
+== AWS EC2 Create Network Interface
+  Associates a subnet with a route table.
+
+=== Parameters
+  [Dry Run]
+    Dry run validates user permissions and inputs without completing the EC2
+    action (true or false).
+  [Subnet ID]
+    The ID of the subnet to associate with the network interface.
+  [Description]
+    A description for the network interface.
+  [Private IP Address (Primary)]
+    The primary private IP address of the network interface. If you don't
+    specify an IP address, Amazon EC2 selects one for you from the subnet range.
+    If you specify an IP address, you cannot indicate any IP addresses specified
+    in Private IP Addresses as primary (only one IP address can be designated as
+    primary).
+  [Security Group IDs]
+    The IDs of one or more security groups, separated by commas.
+  [Private IP Addresses]
+    One or more private IP addresses in JSON format. Note: only one IP address
+    can be designated as primary, and if you are using the 'Private IP Address
+    (Primary)' as well as this field, that will be the primary --
+    [{"private_ip_address":"IP address","primary":true},{"private_ip_address":"IP address","primary":false}]
+  [Secondary Private IP Address Count]
+    The number of secondary private IP addresses to assign to a network
+    interface. When you specify a number of secondary IP addresses, Amazon EC2
+    selects these IP addresses within the subnet range. You can't specify this
+    option and specify more than one private IP address using Private IP Addresses.
+
+=== Results
+  [Network Interface Id]
+    The Id of the network interface
+  [Subnet Id]
+    The Id of the subnet
+  [VPC Id]
+    The Id of the VPC
+  [Availability Zone]
+    The availability zone
+  [Description]
+    A description
+  [Owner Id]
+    The AWS account Id of the owner of the network interface
+  [Requester Id]
+    The ID of the entity that launched the instance on your behalf (for example,
+    AWS Management Console or Auto Scaling).
+  [Requester Managed]
+    A boolean indicating whether the network interface is being managed by AWS
+  [Status]
+    The status of the network interface
+  [MAC Address]
+    The MAC address
+  [Private IP Address]
+    The IPv4 address of the network interface within the subnet
+  [Private DNS Name]
+    The private DNS name
+  [Source Dest Check]
+    A boolean indicating whether traffic to or from the instance is validated
+  [Groups]
+    A list of security groups for the network interface
+  [Attachment Attachment Id]
+    The Id of the network interface attachment
+  [Attachment Instance Id]
+    The Id of the instance
+  [Attachment Instance Owner Id]
+    The AWS account Id of the owner of the instance
+  [Attachment Device Index]
+    The device index of the network interface attachment on the instance
+  [Attachment Status]
+    The attachment state
+  [Attachment Attach Time]
+    The timestamp indicating when the attachment initiated
+  [Attachment Delete On Termination]
+    A boolean indicating whether the network interface is deleted when the
+    instance is terminated
+  [Association Association Id]
+    The allocation id
+  [Association Allocation Id]
+    The association allocation id
+  [Association Public IP]
+    The address of the Elastic IP address bound to the network interface
+  [Association Public DNS Name]
+    The public DNS name
+  [Association IP Owner Id]
+    The Id of the Elastic IP address owner
+  [Tag Set]
+    Any tags assigned to the network interface
+  [Private IP Addresses]
+    A list of private IPv4 addresses associated with the network interface
+
+==== Sample Configuration
+Dry Run:                            false
+Subnet ID:                          subnet-c5311aef
+Description:                        sample-network-interface
+Private IP Address (Primary):       172.44.26.952
+Security Groups:                    security-group1,security-group2
+Private IP Addresses:               [{"private_ip_address":"172.44.26.953","primary":false},{"private_ip_address":"172.44.26.954","primary":false}]
+Secondary Private IP Address Count: 5
+
+=== Detailed Description
+Creates a network interface in the specified subnet. For more information see
+the Amazon Elastic Cloud Compute User Guide online.
+
+The Dry Run parameter validates user permissions and inputs. If it is set to
+true, an error will always be thrown by the handler before completing the
+handler action. Error response will be 'DryRunOperation' if the account has
+proper permissions and inputs; 'UnauthorizedOperation' if the account does
+not have proper permissions.

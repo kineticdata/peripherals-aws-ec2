@@ -1,0 +1,35 @@
+== AWS EC2 Create Tag
+    Creates a single tag against a single resource.
+
+=== Parameters
+  [Dry Run]
+    Dry run validates user permissions and inputs without completing the EC2
+    action (true or false).
+  [Resource]
+      This tag will be applied to the resource id provided here.
+  [Key]
+      The key value for this tag. If an existing tag exists with this key it
+      will be overwritten.
+  [Value]
+      The value for the tag. A blank value in this field will result in an empty
+      value for this tag.
+
+=== Results
+  This handler returns no results
+
+==== Sample Configuration
+    Dry Run:               False
+    Resource:              Test User
+    Key:                   Owner
+    Value:                 DBAdmin
+
+=== Detailed Description
+    This handler uses the AWS REST API. Creates a single tag against a single
+    resource. Will overwrite an existing tag with the same key.  Note: Per AWS,
+    each resource can have a maximum of 10 tags.
+
+    The Dry Run parameter validates user permissions and inputs. If it is set to
+    true, an error will always be thrown by the handler before completing the
+    handler action. Error response will be 'DryRunOperation' if the account has
+    proper permissions and inputs; 'UnauthorizedOperation' if the account does
+    not have proper permissions.

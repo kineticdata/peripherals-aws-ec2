@@ -1,0 +1,19 @@
+<results>
+    <result name="Virtualization Type" type="Regexp">.+</result>
+    <result name="IP Address" type="Regexp">.+</result>
+    <result name="Kernel ID" type="Regexp">.+</result>
+    <result name="AMI Launcher Index" type="Regexp">.+</result>
+    <result name="Private IP Address" type="Regexp">.+</result>
+    <result name="Key Name" type="Regexp">.+</result>
+    <result name="Launch Time" type="Regexp">.+</result>
+    <result name="Instance Type" type="Regexp">.+</result>
+    <result name="Image ID" type="Regexp">.+</result>
+    <result name="Private DNS Name" type="Regexp">.+</result>
+    <result name="Root Device Name" type="Regexp">.+</result>
+    <result name="Root Device Type" type="Regexp">.+</result>
+    <result name="Architecture" type="Regexp">.+</result>
+    <result name="Monitoring State" type="Regexp">.+</result>
+    <result name="Availability Zone" type="Regexp">.+</result>
+    <result name="DNS Name" type="Regexp">.+</result>
+    <result name="Instance State" type="Regexp">.+</result>
+</results>

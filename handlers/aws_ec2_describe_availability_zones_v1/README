@@ -1,0 +1,34 @@
+== AWS EC2 Describe Availability Zones
+    Returns a set of availability zones and details for each of those zones.
+
+=== Parameters
+  [Dry Run]
+    Dry run validates user permissions and inputs without completing the EC2
+    action (true or false).
+  [Zone Names]
+    The names of one or more availability zones, comma separated. Leave blank to
+    return data on all availability zones.
+
+=== Results
+    [Availability Zone Names]
+      A comma separated list of availability zone names that were returned
+    [Availability Zone Details]
+      A JSON object containing the availability zone details in the form of
+      {"zone1": {"name": "zone1","region_name"...}, "zone2": ...}
+
+==== Sample Configuration
+Dry Run:                  false
+Zone Names:               us-east-1a,us-east-1b
+
+=== Detailed Description
+Returns a set of availability zones and details for each of those zones. If no
+availability zones are specified in the input, all zones and their details are
+returned. The zone details are returned as a JSON object that maps the zone
+names to another JSON object containing the zone details. The available details
+are currently 'zone_name','state','region_name', and 'messages'.
+
+The Dry Run parameter validates user permissions and inputs. If it is set to
+true, an error will always be thrown by the handler before completing the
+handler action. Error response will be 'DryRunOperation' if the account has
+proper permissions and inputs; 'UnauthorizedOperation' if the account does
+not have proper permissions.

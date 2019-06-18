@@ -1,0 +1,8 @@
+AWS EC2 Instance Retrieve Status V2 (2017-08-24)
+* Update the EC2 gem to AWS SDK 2.2.34.
+* Change Info Values to be more consistent with the other AWS handlers.
+* Internal tweaks to make execution similar to other AWS handlers.
+* Added Dry Run parameter.
+
+AWS EC2 Instance Retrieve Status V1(2017-08-24)
+* Initial version.  See README for details.

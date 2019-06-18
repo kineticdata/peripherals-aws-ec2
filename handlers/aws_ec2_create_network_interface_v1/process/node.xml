@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taskDefinition id="aws_ec2_create_network_interface" name="AWS EC2 Create Network Interface" schema_version="1.0" version="1">
+    <author>support@kineticdata.com</author>
+    <description>Creates a network interface in the specified subnet. For more information see the Amazon Elastic Cloud Compute User Guide online.</description>
+    <helpurl></helpurl>
+    <visible>true</visible>
+    <deferrable>false</deferrable>
+    <parameters>
+        <parameter id="dry_run" label="Dry Run" required="true"
+            tooltip="Dry run validates user permissions and inputs without completing the EC2 action (true or false).">false</parameter>
+        <parameter id="subnet_id" label="Subnet ID" required="true"
+            tooltip="The ID of the subnet to associate with the network interface." />
+        <parameter id="description" label="Description" required="false"
+            tooltip="A description for the network interface." />
+        <parameter id="private_ip_address" label="Private IP Address (Primary)" required="false"
+            tooltip="The primary private IP address of the network interface. If you don't specify an IP address, Amazon EC2 selects one for you from the subnet range. If you specify an IP address, you cannot indicate any IP addresses specified in Private IP Addresses as primary (only one IP address can be designated as primary)." />
+        <parameter id="groups" label="Security Group IDs" required="false"
+            tooltip="The IDs of one or more security groups, separated by commas." />
+        <parameter id="private_ip_addresses" label="Private IP Addresses" required="false"
+            tooltip="One or more private IP addresses in JSON format. Note: only one IP address can be designated as primary, and if you are using the 'Private IP Address (Primary)' as well as this field, that will be the primary -- [{&quot;private_ip_address&quot;:&quot;IP address&quot;,&quot;primary&quot;:true},{&quot;private_ip_address&quot;:&quot;IP address&quot;,&quot;primary&quot;:false}]"/>
+        <parameter id="secondary_private_ip_address_count" label="Secondary Private IP Address Count" required="false"
+            tooltip="The number of secondary private IP addresses to assign to a network interface. When you specify a number of secondary IP addresses, Amazon EC2 selects these IP addresses within the subnet range. You can't specify this option and specify more than one private IP address using Private IP Addresses" />
+    </parameters>
+    <handler name="aws_ec2_create_network_interface" version="1">
+        <infos>
+            <info name="access_key">&lt;%= @info['access_key'] %&gt;</info>
+            <info name="secret_key">&lt;%= @info['secret_key'] %&gt;</info>
+            <info name="region">&lt;%= @info['region'] %&gt;</info>
+            <info name="enable_debug_logging">&lt;%= @info['enable_debug_logging'] %&gt;</info>
+        </infos>
+        <parameters>
+            <parameter name='dry_run'>&lt;%= @parameters['dry_run'] %&gt;</parameter>
+            <parameter name='subnet_id'>&lt;%= @parameters['subnet_id'] %&gt;</parameter>
+            <parameter name='description'>&lt;%= @parameters['description'] %&gt;</parameter>
+            <parameter name='private_ip_address'>&lt;%= @parameters['private_ip_address'] %&gt;</parameter>
+            <parameter name='groups'>&lt;%= @parameters['groups'] %&gt;</parameter>
+            <parameter name='private_ip_addresses'>&lt;%= @parameters['private_ip_addresses'] %&gt;</parameter>
+            <parameter name='secondary_private_ip_address_count'>&lt;%= @parameters['secondary_private_ip_address_count'] %&gt;</parameter>
+        </parameters>
+    </handler>
+    <results format="xml">
+        <result name="Network Interface Id"/>
+        <result name="Subnet Id"/>
+        <result name="VPC Id"/>
+        <result name="Availability Zone"/>
+        <result name="Description"/>
+        <result name="Owner Id"/>
+        <result name="Requester Id"/>
+        <result name="Requester Managed"/>
+        <result name="Status"/>
+        <result name="MAC Address"/>
+        <result name="Private IP Address"/>
+        <result name="Private DNS Name"/>
+        <result name="Source Dest Check"/>
+        <result name="Groups"/>
+        <result name="Attachment Attachment Id"/>
+        <result name="Attachment Instance Id"/>
+        <result name="Attachment Instance Owner Id"/>
+        <result name="Attachment Device Index"/>
+        <result name="Attachment Status"/>
+        <result name="Attachment Attach Time"/>
+        <result name="Attachment Delete On Termination"/>
+        <result name="Association Association Id"/>
+        <result name="Association Allocation Id"/>
+        <result name="Association Public IP"/>
+        <result name="Association Public DNS Name"/>
+        <result name="Association IP Owner Id"/>
+        <result name="Tag Set"/>
+        <result name="Private IP Addresses"/>
+    </results>
+</taskDefinition>

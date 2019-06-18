@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taskDefinition id="aws_ec2_create_subnet" name="AWS EC2 Create Subnet" schema_version="1.0" version="1">
+    <author>support@kineticdata.com</author>
+    <description>Creates a subnet in an existing VPC.</description>
+    <helpurl></helpurl>
+    <visible>true</visible>
+    <deferrable>false</deferrable>
+    <parameters>
+        <parameter id="dry_run" label="Dry Run" required="true"
+            tooltip="Dry run validates user permissions and inputs without completing the EC2 action (true or false).">false</parameter>
+        <parameter id="vpc_id" label="VPC Id" required="true"
+            tooltip="The ID of the VPN in which the subnet will be created. Must match an existing value in AWS." />
+        <parameter id="cidr_block" label="CIDR Block" required="true"
+            tooltip="The network range for the subnet, in CIDR notation. For example: 10.0.0.0/24. After a subnet is created, the CIDR block cannot be changed. The subnet's CIDR Block can be the same as the VPC's CIDR block, or a subset of the VPC's CIDR block. If you create more than one subnet in a VPC, the subnets' CIDR blocks must not overlap. The smallest subnet you can create uses a /28 netmask (16 IP addresses), and the largest uses a /16 netmask (65,536 IP addresses)." />
+        <parameter id="availability_zone" label="Availability Zone" required="true"
+            tooltip="The availability zone for the subnet." />
+    </parameters>
+    <handler name="aws_ec2_create_subnet" version="1">
+        <infos>
+            <info name="access_key">&lt;%= @info['access_key'] %&gt;</info>
+            <info name="secret_key">&lt;%= @info['secret_key'] %&gt;</info>
+            <info name="region">&lt;%= @info['region'] %&gt;</info>
+            <info name="enable_debug_logging">&lt;%= @info['enable_debug_logging'] %&gt;</info>
+        </infos>
+        <parameters>
+            <parameter name='dry_run'>&lt;%= @parameters['dry_run'] %&gt;</parameter>
+            <parameter name='vpc_id'>&lt;%= @parameters['vpc_id'] %&gt;</parameter>
+            <parameter name='cidr_block'>&lt;%= @parameters['cidr_block'] %&gt;</parameter>
+            <parameter name='availability_zone'>&lt;%= @parameters['availability_zone'] %&gt;</parameter>
+        </parameters>
+    </handler>
+    <results format="xml">
+        <result name="Subnet Id"/>
+        <result name="Subnet State"/>
+        <result name="Subnet VPC Id"/>
+        <result name="Subnet CIDR Block"/>
+        <result name="Subnet Available IP Address Count"/>
+        <result name="Subnet Availability Zone"/>
+        <result name="Subnet Default for AZ"/>
+        <result name="Subnet Map Public IP on Launch"/>
+        <result name="Subnet Tags"/>
+    </results>
+</taskDefinition>

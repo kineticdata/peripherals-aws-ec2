@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taskDefinition id="aws_ec2_create_route" name="AWS EC2 Create Route" schema_version="1.0" version="1">
+    <author>support@kineticdata.com</author>
+    <description>Creates a route in the route table within a VPC.</description>
+    <helpurl></helpurl>
+    <visible>true</visible>
+    <deferrable>false</deferrable>
+    <parameters>
+        <parameter id="dry_run" label="Dry Run" required="true"
+            tooltip="Dry run validates user permissions and inputs without completing the EC2 action (true or false).">false</parameter>
+        <parameter id="route_table_id" label="Route Table ID" required="true"
+            tooltip="The ID of the route table for the route." />
+        <parameter id="destination_cidr_block" label="Destination CIDR Block" required="true"
+            tooltip="The IPv4 CIDR address block used for the destination match." />
+        <parameter id="gateway_id" label="Gateway ID" required="false"
+            tooltip="The ID of an internet gateway or virtual private gateway attached to your VPC." />
+        <parameter id="instance_id" label="NAT Instance ID" required="false"
+            tooltip="The ID of a NAT instance in your VPC. This operation will fail if you specify an instance ID unless exactly one network interface is attached." />
+        <parameter id="vpc_peering_connection_id" label="VPC Peering Connection ID" required="false"
+            tooltip="The ID of a VPC peering connection." />
+        <parameter id="network_interface_id" label="Network Interface ID" required="false"
+            tooltip="The ID of a network interface." />
+    </parameters>
+    <handler name="aws_ec2_create_route" version="1">
+        <infos>
+            <info name="access_key">&lt;%= @info['access_key'] %&gt;</info>
+            <info name="secret_key">&lt;%= @info['secret_key'] %&gt;</info>
+            <info name="region">&lt;%= @info['region'] %&gt;</info>
+            <info name="enable_debug_logging">&lt;%= @info['enable_debug_logging'] %&gt;</info>
+        </infos>
+        <parameters>
+            <parameter name='dry_run'>&lt;%= @parameters['dry_run'] %&gt;</parameter>
+            <parameter name='route_table_id'>&lt;%= @parameters['route_table_id'] %&gt;</parameter>
+            <parameter name='destination_cidr_block'>&lt;%= @parameters['destination_cidr_block'] %&gt;</parameter>
+            <parameter name='gateway_id'>&lt;%= @parameters['gateway_id'] %&gt;</parameter>
+            <parameter name='instance_id'>&lt;%= @parameters['instance_id'] %&gt;</parameter>
+            <parameter name='vpc_peering_connection_id'>&lt;%= @parameters['vpc_peering_connection_id'] %&gt;</parameter>
+            <parameter name='network_interface_id'>&lt;%= @parameters['network_interface_id'] %&gt;</parameter>
+        </parameters>
+    </handler>
+    <results format="xml">
+    </results>
+</taskDefinition>

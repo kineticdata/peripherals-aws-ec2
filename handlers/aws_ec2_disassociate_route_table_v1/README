@@ -1,0 +1,30 @@
+== AWS EC2 Disassociate Route Table
+    Disassociates a subnet from a route table.
+
+=== Parameters
+    [Dry Run]
+      Dry run validates user permissions and inputs without completing the EC2
+      action (true or false).
+    [Association ID]
+        The association ID representing the current association between the
+        route table and subnet.
+
+=== Results
+  This handler returns no results
+
+==== Sample Configuration
+    Dry Run:                     false
+    Association ID:              rtbassoc-9c92bef9
+
+=== Detailed Description
+    This handler uses the AWS REST API to disassociate a subnet from a route
+    table. After you perform this action, the subnet no longer uses the routes
+    in the route table. Instead, it uses the routes in the VPC's main route
+    table.  For more information see the AWS Amazon Virtual Private Cloud
+    User Guide online.
+
+    The Dry Run parameter validates user permissions and inputs. If it is set to
+    true, an error will always be thrown by the handler before completing the
+    handler action. Error response will be 'DryRunOperation' if the account has
+    proper permissions and inputs; 'UnauthorizedOperation' if the account does
+    not have proper permissions.

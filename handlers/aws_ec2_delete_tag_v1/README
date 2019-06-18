@@ -1,0 +1,38 @@
+== AWS EC2 Delete Tag
+    This handler is used to delete a single tag against a single resource.
+
+=== Parameters
+  [Dry Run]
+    Dry run validates user permissions and inputs without completing the EC2
+    action (true or false).
+  [Resource]
+    The ID of the resource to which the tag is attached. Must match an existing
+    value in AWS.
+  [Match Value]
+    Enter 'True' if the value of the key must match the value entered below.
+    Enter 'false' to delete the key regardless of its value.
+  [Key]
+    The key value for this tag to remove.
+  [Value]
+    If the 'Match Value' parameter is used, the value of the tag must match the
+    value entered here.  Leave blank to delete the tag regardless of its value.
+
+=== Results
+  This handler returns no results
+
+==== Sample Configuration
+    Dry Run:            false
+    Resource:           vpc-5981c03c
+    Match Value:        true
+    Key:                Name
+
+=== Detailed Description
+    This handler uses the AWS REST API to delete a single tag against a single
+    resource.  For more information see the AWS Amazon Virtual Private Cloud
+    User Guide online.
+
+    The Dry Run parameter validates user permissions and inputs. If it is set to
+    true, an error will always be thrown by the handler before completing the
+    handler action. Error response will be 'DryRunOperation' if the account has
+    proper permissions and inputs; 'UnauthorizedOperation' if the account does
+    not have proper permissions.

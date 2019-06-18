@@ -1,0 +1,44 @@
+== AWS EC2 Create Key Pair As Attachment
+  Creates a 2048-bit RSA key pair with the specified name and attaches the result to a Kinetic Request CE submission.
+
+=== Parameters
+  [Dry Run]
+    Dry run validates user permissions and inputs without completing the EC2
+    action (true or false).
+  [Key Name]
+    A unique name for the key pair.
+  [Space Slug]
+    Slug of the space to create the submission in.
+  [Kapp Slug]
+    Slug of the kapp to create the submission in.
+  [Form Slug]
+    Slug of the form to create the submission in.
+  [Attachment Field Name]
+    Name of the field to upload the attachment to
+
+=== Sample Configuration
+Dry Run:                 false
+Key Name:                sample-key
+Space Slug:              internal
+Kapp Slug:               catalog
+Form Slug:               sample-form
+Attachment Field Name:   Users Key Pair
+
+=== Results
+  [Submission Id]
+    Id of submission if the call was successful.
+
+=== Detailed Description
+Creates a 2048-bit RSA key pair with the specified name. Amazon EC2 stores the
+public key and displays the private key for you to save to a file. The returned
+private key is then uploaded to the configured Kinetic Filehub for the specified
+Kinetic Request CE instance (using the Request API to start that upload). Once
+the key has been uploaded to Filehub, the key pair will be attached to the
+specified field in a new Request CE submission. The Id for that created
+submission will be returned by the handler.
+
+The Dry Run parameter validates user permissions and inputs. If it is set to
+true, an error will always be thrown by the handler before completing the
+handler action. Error response will be 'DryRunOperation' if the account has
+proper permissions and inputs; 'UnauthorizedOperation' if the account does
+not have proper permissions.

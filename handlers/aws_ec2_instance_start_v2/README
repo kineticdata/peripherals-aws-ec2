@@ -1,0 +1,42 @@
+== AWS EC2 Instance Start
+This handler sends a start request to an AWS EC2 machine instance.
+
+For more information, see the Detailed Description section below.
+
+=== Parameters
+[Instance ID]
+  The instance id of the EC2 virtual machine that this handler will send a start
+  request to.
+
+==== Sample Configuration
+Instance ID::                  i-511f444b1594e8a35
+
+=== Authentication
+This handler requires two info values for AWS authentication: Access Key ID and
+the Secret Access Key. These are analogous to username and password.
+
+To find authentication values from the AWS account:
+
+  1. Navigate to the following URL: https://aws.amazon.com/account/
+  2. Click the "Security Credentials" link (if you are not logged in, you will
+     be prompted to do so).
+  3. Click the "Access Credentials" link.  Here you will find a list of your
+     Access Keys.
+  5. Use the Access Key ID to configure the access_key_id info value of this
+     handler.
+  6. To retrieve the Secret Access Key, click the "Show" link next to the Access
+     Key ID that will be used.
+  7. Use the Secret Access Key to configure the secret_access_key info value of
+     this handler.
+
+=== Results
+[Previous Status]
+  The state of the machine instance prior to the start request being issued.
+[Current Status]
+  The state of the machine instance after the start request. The state will
+  typically be "pending".
+
+=== Detailed Description
+The start_instance function can be executed against any valid instance in any
+state. When executed against an already started instance, the Previous Status
+and Current Status will both be "running".

@@ -1,0 +1,48 @@
+== aws_ec2_create_vpc_v1
+    This handler is used to create a VPC for AWS.
+
+=== Parameters
+  [Dry Run]
+    Dry run validates user permissions and inputs without completing the EC2
+    action (true or false).
+  [CIDR Block]
+    The network range for the VPC, in CIDR notation.
+  [Instance Tenancy]
+    The supported tenancy options for instances launched into the VPC are
+    default, dedicated, or host.
+
+=== Results
+  [VPC ID]
+    The ID of the VPC
+  [VPC State]
+    The current state of the VPC
+  [VPC CIDR Block]
+    The primary IPv4 CIDR block for the VPC
+  [VPC DHCP Options ID]
+    The ID of the set of DHCP options you've associated with the VPC (or default
+    if the default options are associated with the VPC)
+  [VPC Tags]
+    Any tags assigned to the VPC
+  [VPC Instance Tenancy]
+    The allowed tenancy of instances launched into the VPC
+  [VPC Is Default]
+    Indicates whether the VPC is the default VPC
+
+==== Sample Configuration
+    Dry Run:                      false
+    CIDR Block:                   10.0.0.0/16
+    Instance Tenancy:             default
+
+=== Detailed Description
+  This handler uses the AWS REST API to create a VPC for AWS. The input takes
+  a CIDR and an Instance Tenancy options as input values. For Instance Tenancy,
+  a value of 'default' means that instances can be launched with any tenancy;
+  a value of 'dedicated' means all instances launched into the VPC are launched
+  as dedicated tenancy instances regardless of the tenancy assigned to the
+  instance at launch. Dedicated tenancy instances run on single-tenant hardware.
+
+  The Dry Run parameter validates user permissions and inputs. If it is set to
+  true, an error will always be thrown by the handler before completing the
+  handler action. Error response will be 'DryRunOperation' if the account has
+  proper permissions and inputs; 'UnauthorizedOperation' if the account does
+  not have proper permissions.

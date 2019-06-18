@@ -1,0 +1,7 @@
+AWS EC2 Image List V1.1 (2017-08-24)
+* Update the EC2 gem to AWS SDK 2.2.34.
+* Change Info Values to be more consistent with the other AWS handlers.
+* Internal tweaks to make execution similar to other AWS handlers.
+
+AWS EC2 Image List V1 (2012-05-02)
+* Initial version.  See README for details.

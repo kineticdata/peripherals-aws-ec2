@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taskDefinition id="aws_ec2_delete_tag" name="AWS EC2 Delete Tag" schema_version="1.0" version="1">
+    <author>support@kineticdata.com</author>
+    <description>Deletes a single tag against a single resource.</description>
+    <helpurl></helpurl>
+    <visible>true</visible>
+    <deferrable>false</deferrable>
+    <parameters>
+        <parameter id="dry_run" label="Dry Run" required="true"
+            tooltip="Dry run validates user permissions and inputs without completing the EC2 action (true or false).">false</parameter>
+        <parameter id="resource" label="Resource" required="true"
+            tooltip="The ID of the resource to which the tag is attached." />
+        <parameter id="match_value" label="Match Value" required="true"
+            tooltip="Enter 'True' if the value of the key must match the value entered below.  Enter 'false' to delete the key regardless of its value.">false</parameter>
+        <parameter id="key" label="Key" required="true"
+            tooltip="The key value for this tag to remove.">default</parameter>
+        <parameter id="value" label="Value" required="false"
+            tooltip="If the 'Match Value' parameter is used, the value of the tag must match the value entered here.  Leave blank to delete the tag rgardless of its value."/>
+    </parameters>
+    <handler name="aws_ec2_delete_tag" version="1">
+        <infos>
+            <info name="access_key">&lt;%= @info['access_key'] %&gt;</info>
+            <info name="secret_key">&lt;%= @info['secret_key'] %&gt;</info>
+            <info name="region">&lt;%= @info['region'] %&gt;</info>
+            <info name="enable_debug_logging">&lt;%= @info['enable_debug_logging'] %&gt;</info>
+        </infos>
+        <parameters>
+            <parameter name='dry_run'>&lt;%= @parameters['dry_run'] %&gt;</parameter>
+            <parameter name='resource'>&lt;%= @parameters['resource'] %&gt;</parameter>
+            <parameter name='match_value'>&lt;%= @parameters['match_value'] %&gt;</parameter>
+            <parameter name='key'>&lt;%= @parameters['key'] %&gt;</parameter>
+            <parameter name='value'>&lt;%= @parameters['value'] %&gt;</parameter>
+        </parameters>
+    </handler>
+    <results format="xml">
+    </results>
+</taskDefinition>

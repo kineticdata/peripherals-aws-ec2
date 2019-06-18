@@ -1,0 +1,44 @@
+== AWS EC2 Create Route
+    Creates a route in the route table within a VPC.
+
+=== Parameters
+  [Dry Run]
+    Dry run validates user permissions and inputs without completing the EC2
+    action (true or false).
+  [Route Table ID]
+    The ID of the route table for the route.
+  [Destination CIDR Block]
+    The IPv4 CIDR address block used for the destination match.
+  [Gateway ID]
+    The ID of an internet gateway or virtual private gateway attached to your VPC.
+  [NAT Instance ID]
+    The ID of a NAT instance in your VPC. This operation will fail if you
+    specify an instance ID unless exactly one network interface is attached.
+  [VPC Peering Connection ID]
+    The ID of a VPC peering connection.
+  [Network Interface ID]
+    The ID of a network interface.
+
+=== Results
+  This handler returns no results
+
+==== Sample Configuration
+  Dry Run:                  false
+  Route Table ID:           rtb-22574640
+  Destination CIDR Block:   0.0.0.0/0
+  Gateway ID:               igw-c0a643a9
+  NAT Instance ID:
+  VPC Peering Connection ID:
+  Network Interface ID:
+
+=== Detailed Description
+  Creates a route in the route table within a VPC. Exactly one of the following
+  targets must be specified for the call to succeed: Gateway ID, NAT Instance ID,
+  VPC Peering Connection ID, Network Interface ID. For more information see the
+  AWS Amazon Virtual Private Cloud User Guide online.
+
+  The Dry Run parameter validates user permissions and inputs. If it is set to
+  true, an error will always be thrown by the handler before completing the
+  handler action. Error response will be 'DryRunOperation' if the account has
+  proper permissions and inputs; 'UnauthorizedOperation' if the account does
+  not have proper permissions.

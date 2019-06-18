@@ -1,0 +1,159 @@
+== AWS_EC2_Instance_Retrieve
+This handler returns a list of properties for the specified EC2 machine
+instance.
+
+For more information, see the Detailed Description section below.
+
+=== Parameters
+[Instance ID]
+  The instance id of the EC2 virtual machine that this handler will retrieve 
+  details about
+
+==== Sample Configuration
+Instance ID::  <%= @answers['Instance ID'] %>
+
+=== Authentication
+This handler requires two info values for AWS authentication: Access Key ID and
+the Secret Access Key. These are analogous to username and password.
+
+To find authentication values from the AWS account:
+
+  1. Navigate to the following URL: https://aws.amazon.com/account/
+  2. Click the "Security Credentials" link (if you are not logged in, you will
+     be prompted to do so).
+  3. Click the "Access Credentials" link.  Here you will find a list of your
+     Access Keys.
+  5. Use the Access Key ID to configure the access_key_id info value of this
+     handler.
+  6. To retrieve the Secret Access Key, click the "Show" link next to the Access
+     Key ID that will be used.
+  7. Use the Secret Access Key to configure the secret_access_key info value of
+     this handler.
+
+=== Results 
+[Virtualization Type]
+  The type of virtual machine for the instance.  Valid values are "hvm" or
+  "paravirtual".
+[IP Address]
+  The public IP address for the instance.
+[Kernel ID]
+  The operating system associated with the instance's base image
+[AMI Launcher Index]
+  The order in which the instance was launched within a launch group
+[Private IP Address]
+  The internal NAT'ed IP address
+[Key Name]
+  If the instance was launched with a key pair this is the name of the key
+[Launch Time]
+  The timestamp of the last launch of the instance in the format:
+  yyyy-mm-dd hh:mm tz
+[Instance Type]
+  The architecture size of the instance
+[Image ID]
+  The ID of the base AMI for the instance
+[Private DNS Name]
+  Internal hostname of the instance
+[Root Device Name]
+  The internal storage path for the root device, for example "/dev/sda1"
+[Root Device Type]
+  The type of root device.  Valid values are:  "ebs" - persistent storage,
+  "instance-store" - storage allocated for just the duration of the running
+  instance.
+[Architecture]
+  CPU type for the instance.  Valid values are:  "i386" or "x86_64"
+[Monitoring State]
+  Describes whether CloudWatch monitoring is attached to the instance.  Valid
+  values are:  "enabled" or "disabled"
+[Availability Zone]
+  Physical zone associated with the instance.  Used to isolate instances for HA.
+[DNS Name]
+  Public hostname for the instance.
+[Instance State]
+  The state of the EC2 instance.
+
+=== Detailed Description
+
+The describe_instances function is the base AWS::EC2 gem call we are using for
+this handler and returns a multi-level hash/array nest with a top level hash key
+of "reservationsSet".
+
+The reservationSet has the following pseudo-xml form. Elements with the <item> 
+tag are array members and are referenced by numerical index.
+
+All others are hash members and are references by element/key name.
+
+<reservationsSet>
+ <reservationId/)
+  <requesterId/>,
+ <item>
+    <groupSet>
+      <item">
+        <groupId/>
+      </item>
+     </groupSet>
+    <instancesSet>
+      <item>
+        <blockDeviceMapping>
+          <item>
+            <ebs>
+               <attachTime/>,
+               <status/>,
+               <deleteOnTermination/>,
+               <volumeId/>,
+               <deviceName>
+             </ebs>
+           </item>
+         <tagSet>
+           <item>
+             <value/>
+             <key/>
+            </item>
+          </tagset>,
+          <virtualizationType/>,
+          <productCodes/>
+          <ipAddress/>,
+          <kernelId/>
+          <amiLaunchIndex/>
+          <clientToken/>,
+          <privateIpAddress>,
+          <keyName/>",
+          <launchTime>,
+          <instanceType/>,
+          <imageId/>,
+          <privateDnsName/>,
+          <rootDeviceName/>,
+          <rootDeviceType/>
+          <monitoring/>",
+          <reason/>,
+          <placement/>
+          <dnsName/>,
+          <instanceId/>,
+          <instanceState>
+             <name/>
+             <code/>
+           </instanceState>
+        </item>
+      </instanceSet>
+    </item>
+  </reservationSet>,
+
+To retrieve the imageId, for example, simply flatten the above structure by 
+removing inapplicable items
+
+<reservationsSet>
+  <item>
+     <instancesSet>
+      <item>
+          <imageId/>,
+        </item>
+      </instanceSet>
+    </item>
+  </reservationSet>
+
+Treat items as arrays and all other members as hash keys.  Doing so, we can
+reference imageId value in the following manner:
+
+@base_aws_object.reservationSet.item[index].instancesSet.item[index].imageId
+
+In this handler, we are returning just the more interesting properties for an
+instance. Future versions may incorporate additional properties.

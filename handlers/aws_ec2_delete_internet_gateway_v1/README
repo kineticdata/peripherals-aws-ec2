@@ -1,0 +1,28 @@
+== AWS EC2 Delete Internet Gateway
+    This handler is used to delete AWS EC2 internet gateway.
+
+=== Parameters
+  [Dry Run]
+    Dry run validates user permissions and inputs without completing the EC2
+    action (true or false).
+  [Internet Gateway ID]
+    The ID of the Internet Gateway to delete.
+
+=== Results
+  This handler returns no results
+
+==== Sample Configuration
+    Dry Run:                  false
+    Internet Gateway ID:      igw-8d22198f
+
+=== Detailed Description
+    This handler is built on the AWS API.  It's function is to delete an internet gateway.
+    In this, the user may specify which gateway they wish to delete by the IDWID or Internet
+    gateway ID.  The return results will either confirm or deny the success of deleting the
+    specified gateway ID.
+
+    The Dry Run parameter validates user permissions and inputs. If it is set to
+    true, an error will always be thrown by the handler before completing the
+    handler action. Error response will be 'DryRunOperation' if the account has
+    proper permissions and inputs; 'UnauthorizedOperation' if the account does
+    not have proper permissions.

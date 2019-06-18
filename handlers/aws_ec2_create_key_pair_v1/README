@@ -1,0 +1,35 @@
+== AWS EC2 Create Key Pair
+  Creates a 2048-bit RSA key pair with the specified name.
+
+=== Parameters
+  [Dry Run]
+    Dry run validates user permissions and inputs without completing the EC2
+    action (true or false).
+  [Key Name]
+    A unique name for the key pair.
+
+=== Results
+  [Name]
+    Name of the successfully created key pair.
+  [Fingerprint]
+    Fingerprint of the successfully created key pair.
+  [Material]
+    The full contents of the created private key.
+
+==== Sample Configuration
+Dry Run:            false
+Key Name:           sample-key
+
+=== Detailed Description
+  Creates a 2048-bit RSA key pair with the specified name. Amazon EC2 stores the
+  public key and displays the private key for you to save to a file. The private
+  key is returned as an unencrypted PEM encoded PKCS#8 private key. If a key
+  with the specified name already exists, Amazon EC2 returns an error. For more
+  information about key pairs, see the Amazon Elastic Compute Cloud User Guide
+  online.
+
+  The Dry Run parameter validates user permissions and inputs. If it is set to
+  true, an error will always be thrown by the handler before completing the
+  handler action. Error response will be 'DryRunOperation' if the account has
+  proper permissions and inputs; 'UnauthorizedOperation' if the account does
+  not have proper permissions.

@@ -1,0 +1,14 @@
+<results>
+    <result name="Image Location" type="Regexp"></result>
+    <result name="Image State" type="Regexp"></result>
+    <result name="Owner Id" type="Regexp"></result>
+    <result name="isPublic" type="Regexp"></result>
+    <result name="Architecture" type="Regexp"></result>
+    <result name="Image Type" type="Regexp"></result>
+    <result name="Kernel Id" type="Regexp"></result>
+    <result name="Image Owner Alias" type="Regexp"></result>
+    <result name="Name" type="Regexp"></result>
+    <result name="Description" type="Regexp"></result>
+	  <result name="Virtualization Type" type="Regexp"></result>
+    <result name="Tag Set" type="Regexp"></result>
+</results>

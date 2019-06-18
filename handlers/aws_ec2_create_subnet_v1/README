@@ -1,0 +1,57 @@
+== AWS EC2 Create Subnet
+    Creates a subnet in an existing VPC.
+
+=== Parameters
+  [Dry Run]
+    Dry run validates user permissions and inputs without completing the EC2
+    action (true or false).
+  [VPC Id]
+    The ID of the VPN in which the subnet will be created. Must match an
+    existing value in AWS.
+  [CIDR Block]
+    The network range for the subnet, in CIDR notation. For example: 10.0.0.0/24.
+    After a subnet is created, the CIDR block cannot be changed. The subnet's
+    CIDR Block can be the same as the VPC's CIDR block, or a subset of the VPC's
+    CIDR block. If you create more than one subnet in a VPC, the subnets' CIDR
+    blocks must not overlap. The smallest subnet you can create uses a /28 netmask
+    (16 IP addresses), and the largest uses a /16 netmask (65,536 IP addresses).
+  [Availability Zone]
+    The availability zone for the subnet
+
+=== Results
+  [Subnet Id]
+    The ID of the subnet
+  [Subnet State]
+    The current state of the subnet
+  [Subnet VPC Id]
+    The ID of the VPC the subnet is in
+  [Subnet CIDR Block]
+    The IPv4 CIDR block assigned to the subnet
+  [Subnet Available IP Address Count]
+    The number of unused private IPv4 addresses in the subnet
+  [Subnet Availability Zone]
+    The Availability Zone of the subnet
+  [Subnet Default for AZ]
+    A boolean indicating whether this is the default subnet for the Availability
+    Zone
+  [Subnet Map Public IP on Launch]
+    A boolean indicating whether instances launched in this subnet receive a
+    public IPv4 address
+  [Subnet Tags]
+    Any tags assigned to the subnet
+
+==== Sample Configuration
+Dry Run:                         false
+VPC Id:                          vpc-b7e2b6d2
+CIDR Block:                      10.0.0.0/28
+Availability Zone:               us-west-2a
+
+=== Detailed Description
+    Creates a subnet in an existing VPC. For more information see the AWS Amazon
+    Virtual Private Cloud User Guide online.
+
+    The Dry Run parameter validates user permissions and inputs. If it is set to
+    true, an error will always be thrown by the handler before completing the
+    handler action. Error response will be 'DryRunOperation' if the account has
+    proper permissions and inputs; 'UnauthorizedOperation' if the account does
+    not have proper permissions.

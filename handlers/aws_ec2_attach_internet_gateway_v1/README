@@ -1,0 +1,31 @@
+== AWS EC2 Attach Internet Gateway
+    Attaches an Internet gateway to a VPC, enabling connectivity between the
+    Internet and the VPC.
+
+=== Parameters
+  [Dry Run]
+    Dry run validates user permissions and inputs without completing the EC2
+    action (true or false).
+  [Internet Gateway ID]
+    The ID of the internet gateway. Must match an existing value in AWS.
+  [VPC ID]
+    The ID of the VPC. Must match an existing value in AWS.
+
+=== Results
+  This handler returns no results
+
+==== Sample Configuration
+Dry Run:                  false
+Internet Gateway ID:      igw-bbe16fde
+VPC ID:                   vpc-5981c03c
+
+=== Detailed Description
+    Attaches an Internet gateway to a VPC, enabling connectivity between the
+    Internet and the VPC. For more information about your VPC and the Internet
+    gateway, see the Amazon Virtual Private Cloud User Guide online.
+
+    The Dry Run parameter validates user permissions and inputs. If it is set to
+    true, an error will always be thrown by the handler before completing the
+    handler action. Error response will be 'DryRunOperation' if the account has
+    proper permissions and inputs; 'UnauthorizedOperation' if the account does
+    not have proper permissions.

@@ -1,0 +1,16 @@
+AWS EC2 Instance Start V1 (2011-03-04)
+* Initial version.  See README for details.
+
+AWS EC2 Instance Start V2 (2011-03-04)
+* Changed 'Previous State' result to 'Previous Status' to be more consistent
+  with the AWS EC2 console.
+* Changed 'Current State' result to 'Current Status' to be more consistent with
+  the AWS EC2 console.
+* Added comments for execute method in init.rb.
+
+AWS EC2 Instance Start V2.1 (2017-08-24)
+* Update the EC2 gem to AWS SDK 2.2.34.
+* Change Info Values to be more consistent with the other AWS handlers.
+* Internal tweaks to make execution similar to other AWS handlers.
+* Remove Request Id from results because it is no longer supplied by the AWS EC2
+  API

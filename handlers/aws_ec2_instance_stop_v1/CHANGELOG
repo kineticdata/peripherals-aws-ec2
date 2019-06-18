@@ -1,0 +1,9 @@
+AWS EC2 Instance Stop V1 (2011-03-04)
+* Initial version.  See README for details.
+
+AWS EC2 Instance Stop V1.1 (2017-08-24)
+* Update the EC2 gem to AWS SDK 2.2.34.
+* Change Info Values to be more consistent with the other AWS handlers.
+* Internal tweaks to make execution similar to other AWS handlers.
+* Remove Request Id from results because it is no longer supplied by the AWS EC2
+  API

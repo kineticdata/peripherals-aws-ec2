@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taskDefinition id="aws_ec2_instance_start" name="AWS EC2 Instance Start" schema_version="1.0" version="2">
+    <author>support@kineticdata.com</author>
+    <description>This handler sends a start request to an AWS EC2 machine instance</description>
+    <helpurl>http://ktc.kineticdata.com/handler/aws_ec2_instance_start/2</helpurl>
+    <visible>true</visible>
+    <deferrable>false</deferrable>
+    <parameters>
+        <parameter id="instance_id" label="Instance ID" required="true"
+            tooltip="The instance id of the EC2 virtual machine that this handler will send a start request to" />
+    </parameters>
+    <handler name="aws_ec2_instance_start" version="2">
+        <infos>
+          <info name="access_key">&lt;%= @info['access_key'] %&gt;</info>
+          <info name="secret_key">&lt;%= @info['secret_key'] %&gt;</info>
+          <info name="region">&lt;%= @info['region'] %&gt;</info>
+          <info name="enable_debug_logging">&lt;%= @info['enable_debug_logging'] %&gt;</info>
+        </infos>
+        <parameters>
+            <parameter name="instance_id">&lt;%= @parameters['instance_id'] %&gt;</parameter>
+        </parameters>
+    </handler>
+    <results format="xml">
+        <result name="Previous Status"/>
+        <result name="Current Status"/>
+    </results>
+</taskDefinition>

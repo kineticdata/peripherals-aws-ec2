@@ -1,0 +1,51 @@
+== AWS EC2 Describe Images
+    This handler is used to describe one or more of your AWS EC2 instances.
+
+=== Parameters
+    [Dry Run]
+      Dry run validates user permissions and inputs without completing the EC2
+      action (true or false).
+    [Image IDS]
+        A list of one or more image IDs separated by commas
+    [Owners]
+        Specify an AWS account ID, 'amazon' (owner is Amazon), 'aws-marketplace'
+        (owner is AWS Marketplace), 'self' (owner is the sender of the request).
+        Omitting this option returns all images for which you have launch
+        permissions, regardless of ownership. Separate multiple values with
+        a comma.
+    [Executable Users]
+        Limits the images by users with explicit launch permissions. Specify an
+        AWS account ID, 'self' (the send of the request), or 'all' (public AMIs).
+        Separate multiple values with a comma.
+    [Filters]
+      One or more filters in this format {"filter key name 1":["filter
+      values 1","filter values 2",...],"filter key name 2":["filter values 3",
+      "filter values 4",...]}. See AWS documentation for the extensive list of
+      filter key values.
+
+=== Results
+    [Image Info String]
+      This information about the image in the form of a string.
+    [Images Images ID String]
+      The images of the images ID String.
+
+==== Sample Configuration
+    Dry Run:              false
+    Image IDS:            ami-xxxxxxxx
+    Owners:               self
+    Executable Users:     ADMIN
+    Filters:              {"filter key name 1":["filter values 1","filter values 2",...],"filter key name 2":["filter values 3"]}
+
+=== Detailed Description
+    This handler uses the AWS REST API to Describe one or more of the images
+    (AMIs, AKIs, and ARIs) available to you. Images available to you include
+    public images, private images that you own, and private images owned by
+    other AWS accounts but for which you have explicit launch permissions.
+    For more information see the AWS Amazon Virtual Private Cloud
+    User Guide online.
+    
+    The Dry Run parameter validates user permissions and inputs. If it is set to
+    true, an error will always be thrown by the handler before completing the
+    handler action. Error response will be 'DryRunOperation' if the account has
+    proper permissions and inputs; 'UnauthorizedOperation' if the account does
+    not have proper permissions.

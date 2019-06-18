@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taskDefinition id="aws_ec2_create_vpc" name="AWS EC2 Create VPC" schema_version="1.0" version="1">
+    <author>support@kineticdata.com</author>
+    <description>Creates a VPC</description>
+    <helpurl></helpurl>
+    <visible>true</visible>
+    <deferrable>false</deferrable>
+    <parameters>
+        <parameter id="dry_run" label="Dry Run" required="true"
+            tooltip="Dry run validates user permissions and inputs without completing the EC2 action (true or false).">false</parameter>
+        <parameter id="cidr_block" label="CIDR Block" required="true"
+            tooltip="The network range for the VPC, in CIDR notation." />
+        <parameter id="instance_tenancy" label="Instance Tenancy" required="true"
+            tooltip="The supported tenancy options for instances launched into the VPC are default, dedicated, or host.">default</parameter>
+    </parameters>
+    <handler name="aws_ec2_create_vpc" version="1">
+        <infos>
+            <info name="access_key">&lt;%= @info['access_key'] %&gt;</info>
+            <info name="secret_key">&lt;%= @info['secret_key'] %&gt;</info>
+            <info name="region">&lt;%= @info['region'] %&gt;</info>
+            <info name="enable_debug_logging">&lt;%= @info['enable_debug_logging'] %&gt;</info>
+        </infos>
+        <parameters>
+            <parameter name='dry_run'>&lt;%= @parameters['dry_run'] %&gt;</parameter>
+            <parameter name='cidr_block'>&lt;%= @parameters['cidr_block'] %&gt;</parameter>
+            <parameter name='instance_tenancy'>&lt;%= @parameters['instance_tenancy'] %&gt;</parameter>
+        </parameters>
+    </handler>
+    <results format="xml">
+        <result name="VPC ID"/>
+        <result name="VPC State"/>
+        <result name="VPC CIDR Block"/>
+        <result name="VPC DHCP Options ID"/>
+        <result name="VPC Tags"/>
+        <result name="VPC Instance Tenancy"/>
+        <result name="VPC Is Default"/>
+    </results>
+</taskDefinition>

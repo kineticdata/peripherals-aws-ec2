@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taskDefinition id="aws_ec2_modify_instance_attribute" name="AWS EC2 Modify Instance Attribute" schema_version="1.0" version="1">
+    <author>support@kineticdata.com</author>
+    <description>Modifies the specified attribute of the specified instance. You can specify only one attribute at a time.</description>
+    <helpurl></helpurl>
+    <visible>true</visible>
+    <deferrable>false</deferrable>
+    <parameters>
+        <parameter id="dry_run" label="Dry Run" required="true"
+            tooltip="Dry run validates user permissions and inputs without completing the EC2 action (true or false).">false</parameter>
+        <parameter id="instance_id" label="Instance ID" required="true"
+            tooltip="The ID of the instance." />
+        <parameter id="attribute" label="attribute" required="false"
+            tooltip="The name of the attribute" />
+        <parameter id="value" label="Value" required="false"
+            tooltip="A new value for the attribute." />
+        <parameter id="block_device_mappings" label="Block Device Mapping" required="false"
+            tooltip="Modifies the DeleteOnTermination attribute for volumes that are currently attached."/>
+        <parameter id="source_dest_check" label="Source Destination Check" required="false"
+            tooltip="true or false. Specifies whether source/destination checking is enabled." />
+        <parameter id="disable_api_termination" label="Disable API Termination" required="false"
+            tooltip="true or false. If the value is true, you can't terminate the instance using the Amazon EC2 console, CLI, or API; otherwise, you can." />
+        <parameter id="instance_type" label="Instance Type" required="false"
+            tooltip="The instance type. Changes the instance type to the specified value." />
+        <parameter id="kernel" label="Kernel ID" required="false"
+            tooltip="Changes the instance's kernel to the specified value." />
+        <parameter id="ramdisk" label="Ramdisk ID" required="false"
+            tooltip="Changes the instance's RAM disk to the specified value." />
+        <parameter id="user_data" label="User Data" required="false"
+            tooltip="Changes the instance's user data to the specified value. Input is base64-encoded MIME data." />
+        <parameter id="instance_initiated_shutdown_behavior" label="Instance Initiated Shutdown Behavior" required="false"
+            tooltip="Accepts 'stop' or 'terminate'."/>
+        <parameter id="groups" label="Security Group IDs" required="false"
+            tooltip="One or more security group names, separated by commas." />
+        <parameter id="ebs_optimized" label="EBS Optimized" required="false"
+            tooltip="true or false.  Specifies whether the instance is optimized for EBS I/O."/>
+        <parameter id="sriov_net_support" label="SRIOV Net Support" required="false"
+            tooltip="Set to simple to enable enhanced networking for the instance."/>
+    </parameters>
+    <handler name="aws_ec2_modify_instance_attribute" version="1">
+        <infos>
+            <info name="access_key">&lt;%= @info['access_key'] %&gt;</info>
+            <info name="secret_key">&lt;%= @info['secret_key'] %&gt;</info>
+            <info name="region">&lt;%= @info['region'] %&gt;</info>
+            <info name="enable_debug_logging">&lt;%= @info['enable_debug_logging'] %&gt;</info>
+        </infos>
+        <parameters>
+            <parameter name='dry_run'>&lt;%= @parameters['dry_run'] %&gt;</parameter>
+            <parameter name='instance_id'>&lt;%= @parameters['instance_id'] %&gt;</parameter>
+            <parameter name='attribute'>&lt;%= @parameters['attribute'] %&gt;</parameter>
+            <parameter name='value'>&lt;%= @parameters['value'] %&gt;</parameter>
+            <parameter name='block_device_mappings'>&lt;%= @parameters['block_device_mappings'] %&gt;</parameter>
+            <parameter name='source_dest_check'>&lt;%= @parameters['source_dest_check'] %&gt;</parameter>
+            <parameter name='disable_api_termination'>&lt;%= @parameters['disable_api_termination'] %&gt;</parameter>
+            <parameter name='instance_type'>&lt;%= @parameters['instance_type'] %&gt;</parameter>
+            <parameter name='kernel'>&lt;%= @parameters['kernel'] %&gt;</parameter>
+            <parameter name='ramdisk'>&lt;%= @parameters['ramdisk'] %&gt;</parameter>
+            <parameter name='user_data'>&lt;%= @parameters['user_data'] %&gt;</parameter>
+            <parameter name='instance_initiated_shutdown_behavior'>&lt;%= @parameters['instance_initiated_shutdown_behavior'] %&gt;</parameter>
+            <parameter name='groups'>&lt;%= @parameters['groups'] %&gt;</parameter>
+            <parameter name='ebs_optimized'>&lt;%= @parameters['ebs_optimized'] %&gt;</parameter>
+            <parameter name='sriov_net_support'>&lt;%= @parameters['sriov_net_support'] %&gt;</parameter>
+        </parameters>
+    </handler>
+    <results format="xml">
+    </results>
+</taskDefinition>

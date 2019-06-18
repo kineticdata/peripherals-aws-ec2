@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taskDefinition id="aws_ec2_revoke_security_group_ingress" name="AWS EC2 Revoke Security Group Ingress" schema_version="1.0" version="1">
+    <author>support@kineticdata.com</author>
+    <description>Removes one or more ingress rules from a security group.</description>
+    <helpurl></helpurl>
+    <visible>true</visible>
+    <deferrable>false</deferrable>
+    <parameters>
+        <parameter id="dry_run" label="Dry Run" required="true"
+            tooltip="Dry run validates user permissions and inputs without completing the EC2 action (true or false).">false</parameter>
+        <parameter id="group_name" label="Group Name" required="false"
+            tooltip="The name of the security group." />
+        <parameter id="group_id" label="Group ID" required="false"
+            tooltip="The ID of the security group. Required for a non-default VPC." />
+        <parameter id="source_security_group_name" label="Source Security Group Name" required="false"
+            tooltip="The name of the source security group." />
+        <parameter id="source_security_owner_id" label="Source Security Owner ID" required="false"
+            tooltip="The AWS account ID for the source security group." />
+        <parameter id="ip_protocol" label="IP Protocol" required="false"
+            tooltip="The IP protocol name (tcp, udp, icmp). Use -1 to specify all." />
+        <parameter id="from_port" label="From Port" required="false"
+            tooltip="The start of port range for the TCP and UDP protocols, or an ICMP type number." />
+        <parameter id="to_port" label="To Port" required="false"
+            tooltip="The end of port range for the TCP and UDP protocols, or an ICMP code number." />
+        <parameter id="cidr_ip" label="CIDR IP Address Range" required="false"
+            tooltip="The CIDR IP address range." />
+    </parameters>
+    <handler name="aws_ec2_revoke_security_group_ingress" version="1">
+        <infos>
+            <info name="access_key">&lt;%= @info['access_key'] %&gt;</info>
+            <info name="secret_key">&lt;%= @info['secret_key'] %&gt;</info>
+            <info name="region">&lt;%= @info['region'] %&gt;</info>
+            <info name="enable_debug_logging">&lt;%= @info['enable_debug_logging'] %&gt;</info>
+        </infos>
+        <parameters>
+            <parameter name='dry_run'>&lt;%= @parameters['dry_run'] %&gt;</parameter>
+            <parameter name='group_name'>&lt;%= @parameters['group_name'] %&gt;</parameter>
+            <parameter name='group_id'>&lt;%= @parameters['group_id'] %&gt;</parameter>
+            <parameter name='source_security_group_name'>&lt;%= @parameters['source_security_group_name'] %&gt;</parameter>
+            <parameter name='source_security_owner_id'>&lt;%= @parameters['source_security_owner_id'] %&gt;</parameter>
+            <parameter name='ip_protocol'>&lt;%= @parameters['ip_protocol'] %&gt;</parameter>
+            <parameter name='from_port'>&lt;%= @parameters['from_port'] %&gt;</parameter>
+            <parameter name='to_port'>&lt;%= @parameters['to_port'] %&gt;</parameter>
+            <parameter name='cidr_ip'>&lt;%= @parameters['cidr_ip'] %&gt;</parameter>
+        </parameters>
+    </handler>
+    <results format="xml">
+    </results>
+</taskDefinition>

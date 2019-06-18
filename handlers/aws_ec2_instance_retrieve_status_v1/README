@@ -1,0 +1,37 @@
+== AWS EC2 Instance Retrieve Status
+This handler returns the status for the specified EC2 machine instance.
+
+=== Parameters
+[Instance ID]
+  The instance id of the EC2 virtual machine that this handler will retrieve
+  the status of
+
+==== Sample Configuration
+Instance ID::  <%= @answers['Instance ID'] %>
+
+=== Authentication
+This handler requires two info values for AWS authentication: Access Key ID and
+the Secret Access Key. These are analogous to username and password.
+
+To find authentication values from the AWS account:
+
+  1. Navigate to the following URL: https://aws.amazon.com/account/
+  2. Click the "Security Credentials" link (if you are not logged in, you will
+     be prompted to do so).
+  3. Click the "Access Credentials" link.  Here you will find a list of your
+     Access Keys.
+  5. Use the Access Key ID to configure the access_key_id info value of this
+     handler.
+  6. To retrieve the Secret Access Key, click the "Show" link next to the Access
+     Key ID that will be used.
+  7. Use the Secret Access Key to configure the secret_access_key info value of
+     this handler.
+
+=== Results
+[Instance Status]
+  The status of the specified EC2 machine instance.
+
+=== Detailed Description
+  This handler uses AWS' REST API to returns the status for the specified EC2
+  machine instance.  For more information see the AWS Amazon Virtual Private
+  Cloud User Guide online.

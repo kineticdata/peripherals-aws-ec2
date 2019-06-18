@@ -1,0 +1,26 @@
+== AWS EC2 Delete Subnet
+    Deletes a specified subnet.
+
+=== Parameters
+  [Dry Run]
+    Dry run validates user permissions and inputs without completing the EC2
+    action (true or false).
+  [Subnet ID]
+    The ID of the subnet to delete. Must match an existing value in AWS.
+
+=== Results
+  This handler returns no results
+
+==== Sample Configuration
+Dry Run:                      false
+Subnet ID:                    subnet-3a9be84d
+
+=== Detailed Description
+  Deletes a specified subnet. You must terminate all running instances in the
+  subnet before you can delete the subnet.
+
+  The Dry Run parameter validates user permissions and inputs. If it is set to
+  true, an error will always be thrown by the handler before completing the
+  handler action. Error response will be 'DryRunOperation' if the account has
+  proper permissions and inputs; 'UnauthorizedOperation' if the account does
+  not have proper permissions.

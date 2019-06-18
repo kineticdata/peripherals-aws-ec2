@@ -1,0 +1,69 @@
+== AWS EC2 Authorize Security Group Ingress V1
+    Add a security group ingress rule to a security group.
+
+=== Parameters
+  [Dry Run]
+    Dry run validates user permissions and inputs without completing the EC2
+    action (true or false).
+  [Group Name]
+    The name of the security group. Normally used for the EC2-Classic or the
+    default VPC security group. Must match an existing value in AWS.
+  [Group Id]
+    The ID of the security group. Required for a non-default VPC.
+  [Source Security Group Name]
+    The name of the source security group. For EC2-VPC, the source security
+    group must be in the same VPC.
+  [Source Security Group Owner Id]
+    The AWS account number for the source security group. For EC2-VPC, the
+    source security group must be in the same VPC. Creates rules that grant full
+    ICMP, UDP, and TCP access. To create a rule with a specific IP protocol and
+    port range, use a set of IP permissions instead.
+  [IP Protocol]
+    The IP protocol name (tcp, udp, icmp). (VPC only) Use -1 to specify all. You
+    can't specify this parameter when specifying a source security group.
+  [From Port]
+    The start of port range for the TCP and UDP protocols, or an ICMP type number.
+    For the ICMP type number, use -1 to specify all ICMP types. You can't
+    specify this parameter when specifying a source security group.
+  [To Port]
+    The end of port range for the TCP and UDP protocols, or an ICMP code number.
+    For the ICMP code number, use -1 to specify all ICMP codes for the ICMP type.
+    You can't specify this parameter when specifying a source security group.
+  [CIDR IP Address Range]
+    The CIDR IP address range. You can't specify this parameter when specifying
+    a source security group.
+
+=== Results
+  This handler returns no results
+
+==== Sample Configuration
+    Dry Run:                        false
+    Group Name:                     DevGroup
+    Group ID:                       sg-94a22af0
+    Source Security Group Name:
+    Source Security Group Owner ID:
+    IP Protocol:                    tcp
+    From Port:                      22
+    To Port:                        23
+    CIDR IP Address Range:          0.0.0.0/0
+
+=== Detailed Description
+This handler uses the AWS REST API to Add a security group ingress rule to a
+security group. This handler implements a subset of the full AWS call (single
+rule submission only). Most of the inputs for this handler are conditionally
+required based on other input values. Source Security Group Name is required
+if a CIDR IP Address Name isn't specified and vice versa. Also, if a Source
+Security Group Name and/or Source Security Group Owner ID are provided, the
+IP Protocol, From Port, To Port, and CIDR IP Address Range must be left blank.
+This handler returns no results, so if no errors are caught and raised the rule
+has been successfully applied.
+
+More specific information about these parameters can be found in the Amazon EC2
+Ruby documentation (http://docs.aws.amazon.com/sdkforruby/api/Aws/EC2/Client.html#authorize_security_group_ingress-instance_method)
+and in the EC2 REST documentation (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group-ingress.html).
+
+The Dry Run parameter validates user permissions and inputs. If it is set to
+true, an error will always be thrown by the handler before completing the
+handler action. Error response will be 'DryRunOperation' if the account has
+proper permissions and inputs; 'UnauthorizedOperation' if the account does
+not have proper permissions.

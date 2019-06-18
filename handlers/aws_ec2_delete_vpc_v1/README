@@ -1,0 +1,25 @@
+== AWS EC2 Delete VPC
+    Deletes a VPC
+
+=== Parameters
+  [Dry Run]
+    Dry run validates user permissions and inputs without completing the EC2
+    action (true or false).
+  [VPC ID]
+    The ID of the VPC to delete. Must match an existing value in AWS.
+
+=== Results
+  This handler returns no results
+
+==== Sample Configuration
+Dry Run:                   false
+VPC ID:                    vpc-2f27684a
+
+=== Detailed Description
+    Deletes a VPC.
+
+    The Dry Run parameter validates user permissions and inputs. If it is set to
+    true, an error will always be thrown by the handler before completing the
+    handler action. Error response will be 'DryRunOperation' if the account has
+    proper permissions and inputs; 'UnauthorizedOperation' if the account does
+    not have proper permissions.

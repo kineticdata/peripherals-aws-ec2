@@ -1,0 +1,38 @@
+== AWS EC2 Create Route Table
+    This handler is used to create a route table for the specified VPC.
+
+=== Parameters
+  [Dry Run]
+    Dry run validates user permissions and inputs without completing the EC2
+    action (true or false).
+  [VPC ID]
+    The ID of the VPN in which the route table will be created. Must match an existing value in AWS.
+
+=== Results
+    [Route Table ID]
+      ID of route table.
+    [Route Table VPC ID]
+      ID of route table VPC.
+    [Route Table Routes]
+      Table of table routes.
+    [Route Table Associations]
+      Associations of route table.
+    [Route Table Tag]
+      Tag for route table.
+    [Route Table Propagation VGWS]
+      propagating_vgws for route table.
+
+==== Sample Configuration
+    Dry Run:                        false
+    VPC ID:                         vpc-4981f03c
+
+=== Detailed Description
+    This handler uses AWS' REST API to create a route table for the specified VPC.
+    After you create a route table, you can add routes and associate the table with a subnet.
+    For more information see the AWS Amazon Virtual Private Cloud User Guide online.
+
+    The Dry Run parameter validates user permissions and inputs. If it is set to
+    true, an error will always be thrown by the handler before completing the
+    handler action. Error response will be 'DryRunOperation' if the account has
+    proper permissions and inputs; 'UnauthorizedOperation' if the account does
+    not have proper permissions.

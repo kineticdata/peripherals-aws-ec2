@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taskDefinition id="aws_ec2_run_instances" name="AWS EC2 Run Instances" schema_version="1.0" version="1">
+    <author>support@kineticdata.com</author>
+    <description>Launches the specified number of instances using an AMI for which you have permissions.</description>
+    <helpurl></helpurl>
+    <visible>true</visible>
+    <deferrable>false</deferrable>
+    <parameters>
+        <parameter id="dry_run" label="Dry Run" required="true"
+            tooltip="Dry run validates user permissions and inputs without completing the EC2 action (true or false).">false</parameter>
+        <parameter id="image_id" label="Image ID" required="true"
+            tooltip="The ID of the AMI." />
+        <parameter id="min_count" label="Minimum Instance Count" required="true"
+            tooltip="The minimum number of instances to launch. ">1</parameter>
+        <parameter id="max_count" label="Maximum Instance Count" required="true"
+            tooltip="The maximum number of instances to launch.">1</parameter>
+        <parameter id="key_name" label="Key Name" required="false"
+            tooltip="The name of the key pair." />
+        <parameter id="security_groups" label="Security Groups" required="false"
+            tooltip="One or more security group names, separated by commas." />
+        <parameter id="security_group_ids" label="Security Group IDs" required="false"
+            tooltip="One or more security group IDs, separated by commas." />
+        <parameter id="user_data" label="User Data" required="false"
+            tooltip="The Base64-encoded MIME user data for the instances." />
+        <parameter id="instance_type" label="Instance Type" required="false"
+            tooltip="The instance type." />
+        <parameter id="placement" label="Placement" required="false"
+            tooltip="The placement for the instance."/>
+        <parameter id="kernel_id" label="Kernel ID" required="false"
+            tooltip="The ID of the kernel." />
+        <parameter id="ramdisk_id" label="Ramdisk ID" required="false"
+            tooltip="The ID of the RAM disk." />
+        <parameter id="block_device_mappings" label="Block Device Mapping" required="false"
+            tooltip="The block device mapping."/>
+        <parameter id="monitoring" label="Monitoring" required="true"
+            tooltip="true or false. The monitoring for the instance.">false</parameter>
+        <parameter id="subnet_id" label="Subnet ID" required="false"
+            tooltip="The ID of the subnet to launch the instance into."/>
+        <parameter id="disable_api_termination" label="Disable API Termination" required="false"
+            tooltip="true or false. If you set this parameter to true, you can't terminate the instance using the Amazon EC2 console.">false</parameter>
+        <parameter id="instance_initiated_shutdown_behavior" label="Instance Initiated Shutdown Behavior" required="false"
+            tooltip="Accepts 'stop' or 'terminate'.  Indicates whether an instance stops or terminates when you initiate shutdown."/>
+        <parameter id="private_ip_address" label="Private IP Address" required="false"
+            tooltip="The primary IP address."/>
+        <parameter id="client_token" label="Client Token" required="true"
+            tooltip="Unique, case-sensitive identifier you provide to ensure the idempotency of the request."/>
+        <parameter id="network_interfaces" label="Network Interfaces" required="false"
+            tooltip="One or more network interfaces."/>
+        <parameter id="iam_instance_profile" label="IAM Instance Profile" required="false"
+            tooltip="The IAM instance profile."/>
+        <parameter id="ebs_optimized" label="EBS Optimized" required="false"
+            tooltip="true or false. Indicates whether the instance is optimized for EBS I/O."/>
+    </parameters>
+    <handler name="aws_ec2_run_instances" version="1">
+        <infos>
+            <info name="access_key">&lt;%= @info['access_key'] %&gt;</info>
+            <info name="secret_key">&lt;%= @info['secret_key'] %&gt;</info>
+            <info name="region">&lt;%= @info['region'] %&gt;</info>
+            <info name="enable_debug_logging">&lt;%= @info['enable_debug_logging'] %&gt;</info>
+        </infos>
+        <parameters>
+            <parameter name='dry_run'>&lt;%= @parameters['dry_run'] %&gt;</parameter>
+            <parameter name='image_id'>&lt;%= @parameters['image_id'] %&gt;</parameter>
+            <parameter name='min_count'>&lt;%= @parameters['min_count'] %&gt;</parameter>
+            <parameter name='max_count'>&lt;%= @parameters['max_count'] %&gt;</parameter>
+            <parameter name='key_name'>&lt;%= @parameters['key_name'] %&gt;</parameter>
+            <parameter name='security_groups'>&lt;%= @parameters['security_groups'] %&gt;</parameter>
+            <parameter name='security_group_ids'>&lt;%= @parameters['security_group_ids'] %&gt;</parameter>
+            <parameter name='user_data'>&lt;%= @parameters['user_data'] %&gt;</parameter>
+            <parameter name='instance_type'>&lt;%= @parameters['instance_type'] %&gt;</parameter>
+            <parameter name='placement'>&lt;%= @parameters['placement'] %&gt;</parameter>
+            <parameter name='kernel_id'>&lt;%= @parameters['kernel_id'] %&gt;</parameter>
+            <parameter name='ramdisk_id'>&lt;%= @parameters['ramdisk_id'] %&gt;</parameter>
+            <parameter name='block_device_mappings'>&lt;%= @parameters['block_device_mappings'] %&gt;</parameter>
+            <parameter name='monitoring'>&lt;%= @parameters['monitoring'] %&gt;</parameter>
+            <parameter name='subnet_id'>&lt;%= @parameters['subnet_id'] %&gt;</parameter>
+            <parameter name='disable_api_termination'>&lt;%= @parameters['disable_api_termination'] %&gt;</parameter>
+            <parameter name='instance_initiated_shutdown_behavior'>&lt;%= @parameters['instance_initiated_shutdown_behavior'] %&gt;</parameter>
+            <parameter name='private_ip_address'>&lt;%= @parameters['private_ip_address'] %&gt;</parameter>
+            <parameter name='client_token'>&lt;%= @parameters['client_token'] %&gt;</parameter>
+            <parameter name='network_interfaces'>&lt;%= @parameters['network_interfaces'] %&gt;</parameter>
+            <parameter name='iam_instance_profile'>&lt;%= @parameters['iam_instance_profile'] %&gt;</parameter>
+            <parameter name='ebs_optimized'>&lt;%= @parameters['ebs_optimized'] %&gt;</parameter>
+
+        </parameters>
+    </handler>
+    <results format="xml">
+        <result name="Reservation ID"/>
+        <result name="Owner ID"/>
+        <result name="Requester ID"/>
+        <result name="Groups XLM"/>
+        <result name="Groups String"/>
+        <result name="Instances XML"/>
+        <result name="Instances String"/>
+    </results>
+</taskDefinition>

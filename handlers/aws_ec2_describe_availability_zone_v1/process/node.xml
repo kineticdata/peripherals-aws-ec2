@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taskDefinition id="aws_ec2_describe_availability_zone" name="AWS EC2 Describe Availability Zone" schema_version="1.0" version="1">
+    <author>support@kineticdata.com</author>
+    <description>Returns a single availability zone's Name, State, and Region.</description>
+    <helpurl></helpurl>
+    <visible>true</visible>
+    <deferrable>false</deferrable>
+    <parameters>
+        <parameter id="dry_run" label="Dry Run" required="true"
+            tooltip="Dry run validates user permissions and inputs without completing the EC2 action (true or false).">false</parameter>
+        <parameter id="zone_name" label="Zone Name" required="ture"
+            tooltip="The name of an availability zone to describe."></parameter>
+    </parameters>
+    <handler name="aws_ec2_describe_availability_zone" version="1">
+        <infos>
+            <info name="access_key">&lt;%= @info['access_key'] %&gt;</info>
+            <info name="secret_key">&lt;%= @info['secret_key'] %&gt;</info>
+            <info name="region">&lt;%= @info['region'] %&gt;</info>
+            <info name="enable_debug_logging">&lt;%= @info['enable_debug_logging'] %&gt;</info>
+        </infos>
+        <parameters>
+            <parameter name='dry_run'>&lt;%= @parameters['dry_run'] %&gt;</parameter>
+            <parameter name='zone_name'>&lt;%= @parameters['zone_name'] %&gt;</parameter>
+        </parameters>
+    </handler>
+    <results format="xml">
+        <result name="Name"/>
+        <result name="State"/>
+        <result name="Region"/>
+    </results>
+</taskDefinition>

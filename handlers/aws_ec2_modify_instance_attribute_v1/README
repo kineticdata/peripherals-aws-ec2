@@ -1,0 +1,79 @@
+== AWS EC2 Modify Instance Attribute
+    This handler is used to modify the specified attribute of the specified
+    instance. You can specify only one attribute at a time.
+
+=== Parameters
+    [Dry Run]
+      Dry run validates user permissions and inputs without completing the EC2
+      action (true or false).
+    [Instance ID]
+      The ID of the instance.
+    [Value]
+      A new value for the attribute. Use only with the kernel, ramdisk,
+      userData, disableApiTermination, or instanceInitiatedShutdownBehavior
+      attribute.
+    [Block Device Mappings]
+      Modifies the DeleteOnTermination attribute for volumes that are currently
+      attached. The volume must be owned by the caller. If no value is specified
+      for DeleteOnTermination, the default is true and the volume is deleted
+      when the instance is terminated. Format:
+      [{&quot;device_name&quot;:&quot;some value&quot;,&quot;ebs&quot;:{&quot;volume_id&quot;:&quot;some value&quot;,&quot;delete_on_termination&quot;:true|false},&quot;virtual_name&quot;:&quot;some value&quot;,&quot;no_device&quot;:&quot;some value&quot;},...]
+    [Source Destination Check]
+      true or false. Specifies whether source/destination checking is enabled.
+      A value of true means that checking is enabled, and false means checking
+      is disabled. This value must be false for a NAT instance to perform NAT.
+    [Disable API Termination]
+      true or false. If the value is true, you can't terminate the instance
+      using the Amazon EC2 console, CLI, or API; otherwise, you can. You cannot
+      use this paramater for Spot Instances.
+    [Instance Type]
+      The instance type. Changes the instance type to the specified value.
+      For more information, see Instance Types. If the instance type is not
+      valid, the error returned is InvalidInstanceAttributeValue. For more
+      information, see Instance Types in the Amazon Elastic Compute Cloud User
+      Guide online.
+    [Kernel ID]
+      Changes the instance's kernel to the specified value. AWS recommends that
+       you use PV-GRUB instead of kernels and RAM disks. For more information,
+       see PV-GRUB in the Amazon Elastic Compute Cloud User Guide.
+    [Ramdisk ID]
+      Changes the instance's RAM disk to the specified value. AWS recommends
+      that you use PV-GRUB instead of kernels and RAM disks. For more
+      information, see PV-GRUB in the Amazon Elastic Compute Cloud User Guide.
+    [User Data]
+      Changes the instance's user data to the specified value. Input is
+      base64-encoded MIME data.
+    [Instance Initiated Shutdown Behavior]
+      Accepts 'stop' or 'terminate'.  Specifies whether an instance stops or
+      terminates when you initiate shutdown from the instance (using the
+      operating system command for system shutdown).
+    [Security Group IDs]
+      One or more security group names, separated by commas. Changes the
+      security groups of the instance. You must specify at least one security
+      group, even if it's just the default security group for the VPC. You must
+      specify the security group ID, not the security group name.
+    [EBS Optimized]
+      true or false.  Specifies whether the instance is optimized for EBS I/O.
+      This optimization provides dedicated throughput to Amazon EBS and an
+      optimized configuration stack to provide optimal EBS I/O performance.
+      This optimization isn't available with all instance types. Additional
+      usage charges apply when using an EBS Optimized instance.
+    [SRIOV Net Support]
+      Set to simple to enable enhanced networking for the instance. There is no
+       way to disable enhanced networking at this time. This option is supported
+       only for HVM instances. Specifying this option with a PV instance can
+       make it unreachable.
+
+=== Results
+    This handler returns no results
+
+=== Detailed Description
+    This handler uses the AWS REST API to modify the specified attribute of the
+    specified instance. You can specify only one attribute at a time.  For more
+    information see the AWS Amazon Virtual Private Cloud User Guide online.
+
+    The Dry Run parameter validates user permissions and inputs. If it is set to
+    true, an error will always be thrown by the handler before completing the
+    handler action. Error response will be 'DryRunOperation' if the account has
+    proper permissions and inputs; 'UnauthorizedOperation' if the account does
+    not have proper permissions.

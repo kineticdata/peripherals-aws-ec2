@@ -1,0 +1,35 @@
+== AWS EC2 Associate Route Table
+  Associates a subnet with a route table.
+
+=== Parameters
+  [Dry Run]
+    Dry run validates user permissions and inputs without completing the EC2
+    action (true or false).
+  [Subnet ID]
+    The ID of the subnet to which the route table will connect. Must match an
+    existing value in AWS.
+  [Route Table ID]
+    The ID of the route table to connect to the subnet. Must match an existing
+    value in AWS.
+
+=== Results
+  [Association Id]
+    The id of the association if the call was successful.
+
+==== Sample Configuration
+Dry Run:            false
+Subnet ID:          subnet-c5311aef
+Route Table ID:     rtb-076baa09
+
+=== Detailed Description
+Associates a subnet with a route table. The subnet and route must be in the same
+VPC. This association causes traffic originating from the subnet to be routed
+according to the routes in the route table. A route can be associated with
+multiple subnets. For more information see the AWS Amazon Virtual Private Cloud
+User Guide online.
+
+The Dry Run parameter validates user permissions and inputs. If it is set to
+true, an error will always be thrown by the handler before completing the
+handler action. Error response will be 'DryRunOperation' if the account has
+proper permissions and inputs; 'UnauthorizedOperation' if the account does
+not have proper permissions.

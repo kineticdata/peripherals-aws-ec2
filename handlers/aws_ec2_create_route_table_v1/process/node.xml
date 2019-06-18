@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taskDefinition id="aws_ec2_create_route_table" name="AWS EC2 Create Route Table" schema_version="1.0" version="1">
+    <author>support@kineticdata.com</author>
+    <description>Creates a route table for the specified VPC.</description>
+    <helpurl></helpurl>
+    <visible>true</visible>
+    <deferrable>false</deferrable>
+    <parameters>
+        <parameter id="dry_run" label="Dry Run" required="true"
+            tooltip="Dry run validates user permissions and inputs without completing the EC2 action (true or false).">false</parameter>
+        <parameter id="vpc_id" label="VPC ID" required="true"
+            tooltip="The ID of the VPN in which the route table will be created." />
+    </parameters>
+    <handler name="aws_ec2_create_route_table" version="1">
+        <infos>
+            <info name="access_key">&lt;%= @info['access_key'] %&gt;</info>
+            <info name="secret_key">&lt;%= @info['secret_key'] %&gt;</info>
+            <info name="region">&lt;%= @info['region'] %&gt;</info>
+            <info name="enable_debug_logging">&lt;%= @info['enable_debug_logging'] %&gt;</info>
+        </infos>
+        <parameters>
+            <parameter name='dry_run'>&lt;%= @parameters['dry_run'] %&gt;</parameter>
+            <parameter name='vpc_id'>&lt;%= @parameters['vpc_id'] %&gt;</parameter>
+        </parameters>
+    </handler>
+    <results format="xml">
+        <result name="Route Table ID"/>
+        <result name="Route Table VPC ID"/>
+        <result name="Route Table Routes"/>
+        <result name="Route Table Associations"/>
+        <result name="Route Table Tag"/>
+        <result name="Route Table Propagation VGWS"/>
+    </results>
+</taskDefinition>

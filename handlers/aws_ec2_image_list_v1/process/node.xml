@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taskDefinition id="aws_ec2_image_list" name="AWS EC2 Image List" schema_version="1.0" version="1">
+    <author>support@kineticdata.com</author>
+    <description>Retrieves list of machine images attached to the AWS credentials supplied</description>
+    <helpurl>http://ktc.kineticdata.com/handler/aws_ec2_image_list/1</helpurl>
+    <visible>false</visible>
+    <deferrable>false</deferrable>
+    <parameters>
+        <parameter id="image_perms" label="Image Launch Permissions" required="true" menu="Public,Private,Both"
+            tooltip="Indicate whether you want public images, private images or both returned" />
+		<parameter id="image_arch" label="Image Architecture" required="true" menu="i386,x86_64,all"
+            tooltip="Indicate whether you want public images, private images or both returned" />
+		<parameter id="image_type" label="Image Type" required="true" menu="machine,kernel,ramdisk,all"
+            tooltip="Indicate whether you want public images, private images or both returned" />
+		<parameter id="image_state" label="Image State" required="true" menu="available,pending,failed,all"
+            tooltip="Indicate whether you want public images, private images or both returned" />
+    </parameters>
+    <handler name="aws_ec2_image_list" version="1">
+        <infos>
+            <info name="access_key_id">&lt;%= @info['access_key_id'] %&gt;</info>
+            <info name="secret_access_key">&lt;%= @info['secret_access_key'] %&gt;</info>
+        </infos>
+        <parameters>
+            <parameter name="image_perms">&lt;%= @parameters['image_perms'] %&gt;</parameter>
+			<parameter name="image_arch">&lt;%= @parameters['image_arch'] %&gt;</parameter>
+			<parameter name="image_type">&lt;%= @parameters['image_type'] %&gt;</parameter>
+			<parameter name="image_state">&lt;%= @parameters['image_state'] %&gt;</parameter>
+        </parameters>
+    </handler>
+    <results format="xml">
+        <result name="Image List"/>
+    </results>
+</taskDefinition>

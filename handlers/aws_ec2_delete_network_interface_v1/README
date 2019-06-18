@@ -1,0 +1,26 @@
+== AWS EC2 Delete Network Interface
+    Deletes the specified network interface.
+
+=== Parameters
+  [Dry Run]
+    Dry run validates user permissions and inputs without completing the EC2
+    action (true or false).
+  [Network Interface ID]
+    The ID of the network interface
+
+=== Results
+  This handler returns no results
+
+==== Sample Configuration
+Dry Run:                    false
+Network Interface ID:       eni-3a1659c3
+
+=== Detailed Description
+  Deletes the specified network interface. You must detach the network interface
+  before you can delete it.
+
+  The Dry Run parameter validates user permissions and inputs. If it is set to
+  true, an error will always be thrown by the handler before completing the
+  handler action. Error response will be 'DryRunOperation' if the account has
+  proper permissions and inputs; 'UnauthorizedOperation' if the account does
+  not have proper permissions.

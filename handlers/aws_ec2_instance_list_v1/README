@@ -1,0 +1,128 @@
+== AWS_EC2_Instance_List
+This handler returns a list of all instances attached to the AWS credentials 
+supplied.
+
+For more information, see the Detailed Description section below.
+
+=== Parameters
+This handler takes no input parameters.
+
+=== Authentication
+This handler requires two info values for AWS authentication: Access Key ID and
+the Secret Access Key. These are analogous to username and password.
+
+To find authentication values from the AWS account:
+
+  1. Navigate to the following URL: https://aws.amazon.com/account/
+  2. Click the "Security Credentials" link (if you are not logged in, you will
+     be prompted to do so).
+  3. Click the "Access Credentials" link.  Here you will find a list of your
+     Access Keys.
+  5. Use the Access Key ID to configure the access_key_id info value of this
+     handler.
+  6. To retrieve the Secret Access Key, click the "Show" link next to the Access
+     Key ID that will be used.
+  7. Use the Secret Access Key to configure the secret_access_key info value of
+     this handler.
+
+=== Results
+[Instance List]
+  An XML string representing a list of instances
+
+=== Detailed Description
+
+This handler will be used primarily in a loop to iterate over multiple EC2 image
+instances. In order to be used by the Loop handler, a single value is returned
+as an escaped XML string. called "Instance List".
+
+The Instance List will have the following format:
+<instances>
+    <instance>i-01234567</instance>
+    <instance>i-abcdefgh</instance>
+    <instance>i-0123abcd</instance>
+</instances>
+
+To setup the Loop handler, refer to the Instance List from this handler for
+'Data Source' and use '/instances/instance'as the 'Variable Path'.
+
+The describe_instances function is the base AWS::EC2 gem call we are using for
+this handler and returns a multi-level hash/array nest with a top level hash key
+of "reservationsSet".
+
+The reservationSet has the following pseudo-xml form. Elements with the <item> 
+tag are array members and are referenced by numerical index.
+
+All others are hash members and are references by element/key name.
+
+<reservationsSet>
+ <reservationId/)
+  <requesterId/>,
+ <item>
+    <groupSet>
+      <item">
+        <groupId/>
+      </item>
+     </groupSet>
+    <instancesSet>
+      <item>
+        <blockDeviceMapping>
+          <item>
+            <ebs>
+               <attachTime/>,
+               <status/>,
+               <deleteOnTermination/>,
+               <volumeId/>,
+               <deviceName>
+             </ebs>
+           </item>
+         <tagSet>
+           <item>
+             <value/>
+             <key/>
+            </item>
+          </tagset>,
+          <virtualizationType/>,
+          <productCodes/>
+          <ipAddress/>,
+          <kernelId/>
+          <amiLaunchIndex/>
+          <clientToken/>,
+          <privateIpAddress>,
+          <keyName/>",
+          <launchTime>,
+          <instanceType/>,
+          <imageId/>,
+          <privateDnsName/>,
+          <rootDeviceName/>,
+          <rootDeviceType/>
+          <monitoring/>",
+          <reason/>,
+          <placement/>
+          <dnsName/>,
+          <instanceId/>,
+          <instanceState>
+             <name/>
+             <code/>
+           </instanceState>
+        </item>
+      </instanceSet>
+    </item>
+  </reservationSet>,
+
+To retrieve the imageId, for example, simply flatten the above structure by 
+removing inapplicable items
+
+<reservationsSet>
+  <item>
+     <instancesSet>
+      <item>
+          <imageId/>,
+        </item>
+      </instanceSet>
+    </item>
+  </reservationSet>
+
+Treat items as arrays and all other members as hash keys. Doing so, we can
+reference imageId value in the following manner:
+
+@base_aws_object.reservationSet.item[index].instancesSet.item[index].imageId

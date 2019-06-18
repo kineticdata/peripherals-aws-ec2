@@ -1,0 +1,34 @@
+== AWS EC2 Delete Security Group
+    This handler is used to delete a security group in AWS.
+
+=== Parameters
+  [Dry Run]
+    Dry run validates user permissions and inputs without completing the EC2
+    action (true or false).
+  [Group Name]
+    For EC2 Classic and removing the default VPC, The name of the security
+    group. You can specify either the security group name or the security group ID.
+  [Group ID]
+    The ID of the security group. Required for a non-default VPC.
+
+=== Results
+  This handler returns no results
+  
+==== Sample Configuration
+    Dry Run:                        false
+    Group Name:                     DevOps
+    Group ID:                       sg-903004f8
+
+=== Detailed Description
+    This handler is built on the AWS API, and is used to delete a security group. If you
+    attempt to delete a security group that is associated with an instance, or
+    is referenced by another security group, the operation fails with
+    InvalidGroup.InUse in EC2-Classic or DependencyViolation
+    in EC2-VPC.For more information see the AWS Amazon Virtual Private Cloud User
+    Guide online.
+
+    The Dry Run parameter validates user permissions and inputs. If it is set to
+    true, an error will always be thrown by the handler before completing the
+    handler action. Error response will be 'DryRunOperation' if the account has
+    proper permissions and inputs; 'UnauthorizedOperation' if the account does
+    not have proper permissions.

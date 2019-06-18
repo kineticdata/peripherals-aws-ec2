@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taskDefinition id="aws_ec2_image_retrieve" name="AWS EC2 Image Retrieve" schema_version="1.0" version="1">
+    <author>support@kineticdata.com</author>
+    <description>Retrieves the properties of the image supplied</description>
+    <helpurl>http://ktc.kineticdata.com/handler/aws_ec2_image_retrieve/1</helpurl>
+    <visible>true</visible>
+    <deferrable>false</deferrable>
+    <parameters>
+        <parameter id="image_id" label="Image ID" required="true"
+            tooltip="The image id of the EC2 image that this handler will retrieve details about" />
+    </parameters>
+    <handler name="aws_ec2_image_retrieve" version="1">
+        <infos>
+            <info name="access_key">&lt;%= @info['access_key'] %&gt;</info>
+            <info name="secret_key">&lt;%= @info['secret_key'] %&gt;</info>
+            <info name="region">&lt;%= @info['region'] %&gt;</info>
+            <info name="enable_debug_logging">&lt;%= @info['enable_debug_logging'] %&gt;</info>
+        </infos>
+        <parameters>
+            <parameter name="image_id">&lt;%= @parameters['image_id'] %&gt;</parameter>
+        </parameters>
+    </handler>
+    <results format="xml">
+	    <result name="Image Location"/>
+  		<result name="Image State"/>
+  		<result name="Owner Id"/>
+  		<result name="Is Public"/>
+  		<result name="Architecture"/>
+  		<result name="Image Type"/>
+  		<result name="Kernel Id"/>
+  		<result name="Image Owner Alias"/>
+  		<result name="Name"/>
+  		<result name="Description"/>
+  		<result name="Virtualization Type"/>
+  		<result name="Tag Set"/>
+    </results>
+</taskDefinition>

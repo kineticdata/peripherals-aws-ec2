@@ -1,0 +1,32 @@
+== AWS EC2 Create Internet Gateway
+  Creates an internet gateway.
+
+=== Parameters
+  [Dry Run]
+    Dry run validates user permissions and inputs without completing the EC2
+    action (true or false).
+
+=== Results
+  [Id]
+    The id of the internet gateway if the call was successful.
+  [Attachments]
+    A list of attachments (in JSON) that were attached to the internet gateway
+    upon creation
+  [Tags]
+    A list of tags (in JSON) that were attached to the internet gateway upon
+    creation
+
+==== Sample Configuration
+Dry Run:            false
+
+=== Detailed Description
+Creates an internet gateway and return the gateway's id, attachments, and tags.
+The list of returned attachments each include a 'vpc_id' and 'state' keys and
+the returned tags all contain a 'key' and 'value' keys. For more information see
+the AWS Amazon Virtual Private Cloud User Guide online.
+
+The Dry Run parameter validates user permissions and inputs. If it is set to
+true, an error will always be thrown by the handler before completing the
+handler action. Error response will be 'DryRunOperation' if the account has
+proper permissions and inputs; 'UnauthorizedOperation' if the account does
+not have proper permissions.

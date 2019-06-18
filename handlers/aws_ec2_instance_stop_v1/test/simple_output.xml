@@ -1,0 +1,4 @@
+<results>
+    <result name="Previous Status" type="Regexp">.+</result>
+    <result name="Current Status" type="Regexp">.+</result>
+</results>

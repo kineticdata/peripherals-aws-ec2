@@ -1,0 +1,33 @@
+== AWS EC2 Create Security Group
+    This handler is used to create a security group in AWS.
+=== Parameters
+  [Dry Run]
+    Dry run validates user permissions and inputs without completing the EC2
+    action (true or false).
+  [Group Name]
+    A friendly name for the security group (255 character max length).
+  [Description]
+    A description for the security group (255 character max length).
+  [VPC ID]
+    The ID of the VPC.
+
+=== Results
+    [Group ID]
+      The group ID of the security group that you just created.
+
+==== Sample Configuration
+    Dry Run:                        false
+    Group Name:                     DevGroup1
+    Description:                    This is a security group for ec2 instances managed by DevGroup1
+    VPC ID:                         vpc-b7w2b6d2
+
+=== Detailed Description
+    This handler is used to create a security group in AWS.  A security group is for use with instances
+    either in the EC2-Classic platform or in a specific VPC.  For more information see the Amazon Elastic
+    Compute Cloud User Guide and the Amazon Virtual Private Cloud User Guide online.
+
+    The Dry Run parameter validates user permissions and inputs. If it is set to
+    true, an error will always be thrown by the handler before completing the
+    handler action. Error response will be 'DryRunOperation' if the account has
+    proper permissions and inputs; 'UnauthorizedOperation' if the account does
+    not have proper permissions.

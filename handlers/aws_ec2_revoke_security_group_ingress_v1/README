@@ -1,0 +1,58 @@
+== AWS EC2 Revoke Security Group Ingress
+    This handler uses the AWS REST API to Remove one or more ingress rules from
+    a security group.
+
+=== Parameters
+    [Dry Run]
+      Dry run validates user permissions and inputs without completing the EC2
+      action (true or false).
+    [Group Name]
+        The name of the security group. Normally used for the EC2-Classic or the
+        default VPC security group. Must match an existing value in AWS.
+    [Group ID]
+        The ID of the security group. Required for a non-default VPC.
+    [Source Security Group Name]
+        The name of the source security group. You can't specify this parameter
+        in combination with the following parameters: the CIDR IP address range,
+        the start of the port range, the IP protocol, and the end of the port
+        range. For EC2-VPC, the source security group must be in the same VPC.
+    [Source Security Owner ID]
+      The AWS account ID for the source security group. For EC2-VPC, the source
+      security group must be in the same VPC. You can't specify this parameter
+      in combination with the following parameters: the CIDR IP address range,
+      the IP protocol, the start of the port range, and the end of the port
+      range. To revoke a specific rule for an IP protocol and port range, use
+      a set of IP permissions instead.
+    [IP Protocol]
+      The IP protocol name (tcp, udp, icmp). Use -1 to specify all.
+    [From Port]
+      The start of port range for the TCP and UDP protocols, or an ICMP type
+      number. For the ICMP type number, use -1 to specify all ICMP types.
+    [To Port]
+      The end of port range for the TCP and UDP protocols, or an ICMP code
+      number. For the ICMP code number, use -1 to specify all ICMP codes for
+      the ICMP type.
+    [CIDR IP Address Range]
+      The CIDR IP address range. You can't specify this parameter when
+      specifying a source security group.
+=== Results
+    This handler returns no results
+
+=== Detailed Description
+    This handler uses the AWS REST API to Remove one or more ingress rules from
+    a security group. The values that you specify in the revoke request
+    (for example, ports) must match the existing rule's values for the rule to
+    be removed. Each rule consists of the protocol and the CIDR range or source
+    security group. For the TCP and UDP protocols, you must also specify the
+    destination port or range of ports. For the ICMP protocol, you must also
+    specify the ICMP type and code. Rule changes are propagated to instances
+    within the security group as quickly as possible. However, a small delay
+    might occur.  This handler implements a subset of the full AWS call (single
+    rule submission only).  For more information see the AWS Amazon Virtual
+    Private Cloud User Guide online.
+
+    The Dry Run parameter validates user permissions and inputs. If it is set to
+    true, an error will always be thrown by the handler before completing the
+    handler action. Error response will be 'DryRunOperation' if the account has
+    proper permissions and inputs; 'UnauthorizedOperation' if the account does
+    not have proper permissions.

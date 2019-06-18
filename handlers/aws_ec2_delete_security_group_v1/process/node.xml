@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taskDefinition id="aws_ec2_delete_security_group" name="AWS EC2 Delete Security Group" schema_version="1.0" version="1">
+    <author>support@kineticdata.com</author>
+    <description>Deletes a security group.</description>
+    <helpurl></helpurl>
+    <visible>true</visible>
+    <deferrable>false</deferrable>
+    <parameters>
+        <parameter id="dry_run" label="Dry Run" required="true"
+            tooltip="Dry run validates user permissions and inputs without completing the EC2 action (true or false).">false</parameter>
+        <parameter id="group_name" label="Group Name" required="false"
+            tooltip="For EC2 Classic and removing the default VPC, The name of the security group. You can specify either the security group name or the security group ID." />
+        <parameter id="group_id" label="Group ID" required="false"
+            tooltip="The ID of the security group. Required for a non-default VPC." />
+    </parameters>
+    <handler name="aws_ec2_delete_security_group" version="1">
+        <infos>
+            <info name="access_key">&lt;%= @info['access_key'] %&gt;</info>
+            <info name="secret_key">&lt;%= @info['secret_key'] %&gt;</info>
+            <info name="region">&lt;%= @info['region'] %&gt;</info>
+            <info name="enable_debug_logging">&lt;%= @info['enable_debug_logging'] %&gt;</info>
+        </infos>
+        <parameters>
+            <parameter name='dry_run'>&lt;%= @parameters['dry_run'] %&gt;</parameter>
+            <parameter name='group_name'>&lt;%= @parameters['group_name'] %&gt;</parameter>
+            <parameter name='group_id'>&lt;%= @parameters['group_id'] %&gt;</parameter>
+        </parameters>
+    </handler>
+    <results format="xml">
+    </results>
+</taskDefinition>

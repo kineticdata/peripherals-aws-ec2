@@ -1,0 +1,33 @@
+== AWS EC2 Detach Internet Gateway
+    This handler is used to detached an Internet gateway from a VPC,
+    disabling connectivity between the Internet and the VPC.
+
+=== Parameters
+    [Dry Run]
+      Dry run validates user permissions and inputs without completing the EC2
+      action (true or false).
+    [Internet Gateway ID]
+        The ID of the Internet Gateway to detach. Must match an existing value in AWS.
+    [VPC ID]
+        The ID of the VPC to which the Internet Gateway is currently attached.
+        Must match an existing value in AWS.
+
+=== Results
+    This handler returns no results
+
+==== Sample Configuration
+    Dry Run:                        false
+    Internet Gateway ID:            igw-6c20ab09
+    VPC ID:                         vpc-2f27684a
+
+=== Detailed Description
+    This handler uses the AWS REST API to detached an Internet gateway from a
+    VPC, disabling connectivity between the Internet and the VPC. The VPC must
+    not contain any running instances with Elastic IP addresses.  For more
+    information see the AWS Amazon Virtual Private Cloud User Guide online.
+
+    The Dry Run parameter validates user permissions and inputs. If it is set to
+    true, an error will always be thrown by the handler before completing the
+    handler action. Error response will be 'DryRunOperation' if the account has
+    proper permissions and inputs; 'UnauthorizedOperation' if the account does
+    not have proper permissions.
