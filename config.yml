@@ -1,6 +1,7 @@
 ---
 repo-name: peripherals-aws-ec2
 categories:
-- Cloud
-- DevOps
+  - Cloud
+  - DevOps
 display-name: Amazon EC2
+manufacture: Amazon
