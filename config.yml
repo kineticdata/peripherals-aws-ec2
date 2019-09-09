@@ -4,4 +4,5 @@ categories:
   - Cloud
   - DevOps
 display-name: Amazon EC2
-manufacture: Amazon
+manufacturer: Amazon
+description: Amazon Elastic Compute Cloud (Amazon EC2) is a web service that provides secure, scalable compute capacity in the cloud.
