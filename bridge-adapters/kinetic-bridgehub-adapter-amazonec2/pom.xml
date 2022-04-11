@@ -2,11 +2,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.kineticdata.bridges.adapter</groupId>
-    <artifactId>kinetic-bridgehub-adapter-amazonec2-v1</artifactId>
-    <version>1.0.2</version>
+    <artifactId>kinetic-bridgehub-adapter-amazonec2</artifactId>
+    <version>2.0.0</version>
     <packaging>jar</packaging>
 
-    <name>kinetic-bridgehub-adapter-amazonec2-v1</name>
+    <name>kinetic-bridgehub-adapter-amazonec2</name>
     <scm>
         <connection>scm:git:https://github.com/kineticcommunity/kinetic-bridgehub-adapter-amazonec2.git</connection>
         <developerConnection>scm:git:https://github.com/kineticcommunity/kinetic-bridgehub-adapter-amazonec2.git</developerConnection>
@@ -21,7 +21,7 @@
           <id>com.kineticdata.snapshots</id>
           <url>http://utilities.kineticdata.com/nexus/content/repositories/snapshots</url>
         </snapshotRepository>
-    </distributionManagement>
+      </distributionManagement>
 
     <repositories>
         <repository>

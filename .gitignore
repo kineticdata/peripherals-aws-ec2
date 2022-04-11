@@ -5,6 +5,8 @@
 **/.project
 **/.settings/
 **/.vscode
+**/.idea
+**/.DS_Store
 **/pom.xml.tag
 **/pom.xml.releaseBackup
 **/pom.xml.versionsBackup
