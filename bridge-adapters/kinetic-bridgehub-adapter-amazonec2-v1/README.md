@@ -1,9 +1,9 @@
-# Kinetic Bridgehub Adapter Amazon EC2
+# Kinetic Bridgehub Adapter Amazon EC2 (Legacy v1)
 This bridge adapter is used for interacting with the AWS EC2 endpoints
 
 ## Configuration Values
 
-| Name                    | Description | Example Value |
+| Name                   | Description | Example Value |
 | :---------------------- | :------------------------- | :------------------------- |
 | Access Key        | Access Keys are used to sign the requests you send to Amazon S3. | AKIA7997DFLK907DIV |
 | Secret Key        | An AWS key similar to a private key. | 6+2werFvwetjou+jklsjdfgu93jg4gf4 |
@@ -11,4 +11,4 @@ This bridge adapter is used for interacting with the AWS EC2 endpoints
 | Host              | |
 | Region            | AWS has the concept of a Region, which is a physical location around the world where we cluster data centers. | us-east-1 | 
 | Action            | The action that you want to perform. | RunInstances |
-| API Version       | The API version to use. | 2016-11-15. |
+| API Version       | The API version to use. | 2016-11-15. | 
