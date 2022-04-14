@@ -36,14 +36,22 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.kineticdata.agent</groupId>
+            <artifactId>kinetic-agent-adapter</artifactId>
+            <version>1.1.0</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.1</version>
+            <scope>test</scope>
+            <type>jar</type>
+        </dependency>
+        <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
             <version>4.5.1</version>
-        </dependency>
-        <dependency>
-            <groupId>com.kineticdata.bridges.adapter</groupId>
-            <artifactId>kinetic-bridgehub-adapter</artifactId>
-            <version>1.2.0</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
