@@ -42,17 +42,16 @@ repositories {
 }
 
 dependencies {
-  implementation("com.kineticdata.agent:kinetic-agent-adapter:1.1.3-SNAPSHOT")
   implementation("org.apache.httpcomponents:httpclient:4.5.1")
+  implementation("com.kineticdata.bridges.adapter:kinetic-bridgehub-adapter:1.2.0")
   implementation("org.slf4j:slf4j-api:1.7.10")
   implementation("org.json:json:20230227")
   implementation("com.fasterxml.jackson.core:jackson-databind:2.12.6.1")
-  testImplementation("junit:junit:4.13.1")
 }
 
 group = "com.kineticdata.bridges.adapter"
-version = "2.0.1-SNAPSHOT"
-description = "kinetic-bridgehub-adapter-amazonec2"
+version = "1.0.3-SNAPSHOT"
+description = "kinetic-bridgehub-adapter-amazonec2-v1"
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 publishing {
