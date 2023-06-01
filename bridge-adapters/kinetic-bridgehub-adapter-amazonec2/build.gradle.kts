@@ -45,7 +45,7 @@ repositories {
 }
 
 dependencies {
-  implementation("com.kineticdata.agent:kinetic-agent-adapter:1.1.3-SNAPSHOT")
+  implementation("com.kineticdata.agent:kinetic-agent-adapter:1.1.3")
   implementation("org.apache.httpcomponents:httpclient:4.5.1")
   implementation("org.slf4j:slf4j-api:1.7.10")
   implementation("org.json:json:20230227")
