@@ -1,6 +1,9 @@
+import java.text.SimpleDateFormat
+import java.util.Date
 plugins {
   java
   `maven-publish`
+   id("net.nemerosa.versioning") version "2.14.0"
 }
 
 repositories {
@@ -51,7 +54,7 @@ dependencies {
 }
 
 group = "com.kineticdata.bridges.adapter"
-version = "2.0.1-SNAPSHOT"
+version = "2.0.1"
 description = "kinetic-bridgehub-adapter-amazonec2"
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 
@@ -73,4 +76,21 @@ publishing {
 
 tasks.withType<JavaCompile>() {
   options.encoding = "UTF-8"
+}
+versioning {
+  gitRepoRootDir = "../../"
+}
+tasks.processResources {
+  duplicatesStrategy = DuplicatesStrategy.INCLUDE
+  val currentDate = SimpleDateFormat("yyyy-MM-dd").format(Date())
+  from("src/main/resources"){
+    filesMatching("**/*.version") {    
+      expand(    
+        "buildNumber" to versioning.info.build,
+        "buildDate" to currentDate,    
+        "timestamp" to System.currentTimeMillis(),    
+        "version" to project.version    
+      )    
+    }
+  }
 }
